@@ -1,0 +1,109 @@
+# --- Login Route ---
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # In a real app, you would validate credentials against a database here.
+        email = request.form.get('email')
+        # Placeholder logic: if email is provided, simulate a successful login
+        if email:
+            session['user_email'] = email
+            return redirect(url_for('dashboard')) 
+        else:
+            # You would handle login failure and show a message here
+            return render_template('login.html', error="Invalid credentials. Please try again.")
+
+    return render_template('login.html')
+
+# --- Registration Flow ---
+
+# Step 1: Create Account Details
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/register/step1', methods=['GET', 'POST'])
+def create_account():
+    if request.method == 'POST':
+        # Store data in session to carry it through the steps
+        session['reg_data'] = request.form.to_dict()
+        return redirect(url_for('user_type'))
+    
+    # Pass the current step number for the progress bar
+    return render_template('create_account.html', step=1)
+
+# Step 2: Tell Us About Yourself (User Type)
+@app.route('/register/step2', methods=['GET', 'POST'])
+def user_type():
+    if request.method == 'POST':
+        user_type = request.form.get('user_type')
+        
+        # Merge new data into the session
+        session['reg_data'].update(request.form.to_dict())
+
+        # Logic fork based on user type (Existing vs. Prospective)
+        if user_type == 'existing':
+            # Existing clients go to the 'Banks Used' survey (Step 3.1)
+            return redirect(url_for('survey_bank'))
+        
+        # Prospective clients skip the 'banks used' and go to 'services interested in' (Step 3.2)
+        return redirect(url_for('survey_interest'))
+        
+    return render_template('user_type.html', step=2)
+
+# Step 3.1 (Existing Clients): Banks Currently Used
+@app.route('/register/step3/banks', methods=['GET', 'POST'])
+def survey_bank():
+    if request.method == 'POST':
+        # Store selected banks in session (form.getlist for multiple checkboxes)
+        session['reg_data']['banks_used'] = request.form.getlist('bank')
+        return redirect(url_for('survey_interest'))
+    
+    # Pass the current step and sub-step for the progress indicators
+    return render_template('survey_bank.html', step=3, sub_step=1)
+
+# Step 3.2: Services Interested In
+@app.route('/register/step3/interest', methods=['GET', 'POST'])
+def survey_interest():
+    if request.method == 'POST':
+        # Store selected services in session
+        session['reg_data']['services_interested'] = request.form.getlist('service')
+        return redirect(url_for('survey_preference'))
+    
+    # Determine the 'back' link based on whether they came from Step 2 (Prospective) or Step 3.1 (Existing)
+    back_url = url_for('survey_bank') if session.get('reg_data', {}).get('user_type') == 'existing' else url_for('user_type')
+    
+    return render_template('survey_interest.html', step=3, sub_step=2, back_url=back_url)
+
+# Step 3.3: Banking Preferences (Mobile/In-Person) - Final Step
+@app.route('/register/step3/preference', methods=['GET', 'POST'])
+def survey_preference():
+    if request.method == 'POST':
+        # Final data collection
+        session['reg_data']['preference'] = request.form.get('preference')
+        
+        # --- Finalize Registration Logic ---
+        final_data = session.pop('reg_data', {})
+        print("--- FINAL REGISTRATION DATA ---")
+        for key, value in final_data.items():
+            print(f"{key}: {value}")
+        print("-------------------------------")
+        
+        # In a real app, you would save final_data to a database here.
+        session['user_name'] = final_data.get('full_name', 'New User')
+        
+        return redirect(url_for('dashboard'))
+        
+    return render_template('survey_preference.html', step=3, sub_step=3)
+
+# --- Dashboard/Success Route (Protected) ---
+@app.route('/dashboard')
+def dashboard():
+    # Simple check to see if user is logged in
+    if 'user_email' in session or 'user_name' in session:
+        user = session.get('user_name', session.get('user_email', 'User'))
+        return render_template('dashboard.html', user=user)
+    
+    return redirect(url_for('login'))
+
+# Add a basic dashboard.html (not provided in the previous step, but useful)
+@app.route('/dashboard.html')
+def render_dashboard():
+    # This is just to satisfy the redirect for now
+    return "<h1>Welcome to SatisBank Dashboard!</h1><p>Registration/Login Successful for: " + session.get('user_name', session.get('user_email', 'Guest')) + "</p>"
