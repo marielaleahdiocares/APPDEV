@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+
+<div class="app-container">
+    
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="logo-icon">S</span>atisBank
+        </div>
+
+        <div class="menu-label">Menu</div>
+        <ul class="nav-menu">
+            <li class="active"><a href="#"><i class="fa-solid fa-table-columns"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i> Comparison</a></li>
+            <li><a href="#"><i class="fa-solid fa-thumbs-up"></i> Recommendation</a></li>
+            <li><a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
+            <li><a href="#"><i class="fa-solid fa-building"></i> Bank Profile</a></li>
+        </ul>
+
+        <div class="menu-label">General</div>
+        <ul class="nav-menu">
+            <li><a href="#"><i class="fa-regular fa-user"></i> Profile</a></li>
+            <li><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a></li>
+        </ul>
+
+        <div class="help-box">
+            <div class="help-icon">?</div>
+            <h4>Help Center</h4>
+            <p>Having trouble in SatisBank? Please contact us.</p>
+            <button class="btn-white">Go To Help Center</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="top-header">
+            <h1>Dashboard</h1>
+            <div class="user-actions">
+                <div class="icon-btn"><i class="fa-regular fa-bell"></i></div>
+                <div class="user-profile">
+                    <div class="avatar">XL</div>
+                    <span>Xyross Lee</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+
+            <div class="grid-col-left">
+                <div class="card recommended-card">
+                    <div class="card-header">
+                        <h3>Recommended for You</h3>
+                        <p class="sub-text">Based on your preferences and needs</p>
+                    </div>
+                    
+                    <div class="bank-list">
+                        <div class="bank-item">
+                            <div class="rank-circle">1</div>
+                            <div class="bank-info">
+                                <h4>BPI</h4>
+                                <p>Bank of the Philippine Islands</p>
+                                <div class="tags">
+                                    <span>Mobile banking app</span>
+                                    <span>Wealth management</span>
+                                </div>
+                            </div>
+                            <span class="score-green">8.7/10</span>
+                        </div>
+                         <div class="bank-item">
+                            <div class="rank-circle">2</div>
+                            <div class="bank-info">
+                                <h4>BDO</h4>
+                                <p>Banco de Oro Unibank</p>
+                                <div class="tags">
+                                    <span>Extensive branch</span>
+                                    <span>Digital banking</span>
+                                </div>
+                            </div>
+                            <span class="score-green">8.5/10</span>
+                        </div>
+                        <div class="bank-item">
+                            <div class="rank-circle">3</div>
+                            <div class="bank-info">
+                                <h4>Security Bank</h4>
+                                <p>Security Bank Corporation</p>
+                                <div class="tags">
+                                    <span>High interest savings</span>
+                                </div>
+                            </div>
+                            <span class="score-green">8.4/10</span>
+                        </div>
+                        <div class="bank-item">
+                            <div class="rank-circle">4</div>
+                            <div class="bank-info">
+                                <h4>Metrobank</h4>
+                                <p>Metropolitan Bank & Trust</p>
+                                <div class="tags">
+                                    <span>Int'l presence</span>
+                                </div>
+                            </div>
+                            <span class="score-green">8.3/10</span>
+                        </div>
+                    </div>
+                    <button class="btn-block-blue">View All Banks</button>
+                </div>
+            </div>
+
+            <div class="grid-col-right">
+                
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <p class="stat-label text-blue">Average Satisfaction</p>
+                        <div class="stat-flex">
+                            <div class="icon-sq blue-bg"><i class="fa-solid fa-star"></i></div>
+                            <div>
+                                <h3>8.7/10</h3>
+                                <small>Across Your Banks</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label text-green">Banks Tracked</p>
+                        <div class="stat-flex">
+                            <div class="icon-sq green-bg"><i class="fa-solid fa-chart-simple"></i></div>
+                            <div>
+                                <h3>10</h3>
+                                <small>Philippine Banks</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label text-orange">Bookmarked</p>
+                        <div class="stat-flex">
+                            <div class="icon-sq orange-bg"><i class="fa-regular fa-bookmark"></i></div>
+                            <div>
+                                <h3>5</h3>
+                                <small>Saved Banks</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label text-purple">User Type</p>
+                        <div class="stat-flex">
+                            <div class="icon-sq purple-bg"><i class="fa-regular fa-user"></i></div>
+                            <div>
+                                <h4>Prospective</h4>
+                                <small>Client</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card satisfaction-card">
+                    <div class="card-header">
+                        <h3>Satisfaction Overview</h3>
+                        <p class="sub-text">Complete overview of customer satisfaction scores</p>
+                    </div>
+                    <div class="satisfaction-list">
+                        <div class="sat-row">
+                            <span class="sat-name">1. BPI (Bank of the Philippine Islands)</span>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 87%;"></div>
+                            </div>
+                            <span class="sat-score">8.7/10 <i class="fa-solid fa-arrow-trend-up text-green"></i></span>
+                        </div>
+                        <div class="sat-row">
+                            <span class="sat-name">2. BDO (Banco de Oro Unibank, Inc.)</span>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 85%;"></div>
+                            </div>
+                            <span class="sat-score">8.5/10 <i class="fa-solid fa-arrow-trend-up text-green"></i></span>
+                        </div>
+                         <div class="sat-row">
+                            <span class="sat-name">3. Security Bank Corporation</span>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 84%;"></div>
+                            </div>
+                            <span class="sat-score">8.4/10 <i class="fa-solid fa-arrow-trend-up text-green"></i></span>
+                        </div>
+                         <div class="sat-row">
+                            <span class="sat-name">4. Metrobank</span>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 83%;"></div>
+                            </div>
+                            <span class="sat-score">8.3/10 <i class="fa-solid fa-arrow-trend-up text-green"></i></span>
+                        </div>
+                         <div class="sat-row">
+                            <span class="sat-name">5. RCBC</span>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 81%;"></div>
+                            </div>
+                            <span class="sat-score">8.1/10 <i class="fa-solid fa-arrow-trend-up text-green"></i></span>
+                        </div>
+                    </div>
+                    <button class="btn-block-blue" style="margin-top: 15px;">Compare Banks</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="offers-grid">
+            <div class="card offer-card green-theme">
+                <div class="offer-header">
+                    <i class="fa-solid fa-piggy-bank"></i> Best Savings Rate
+                </div>
+                <div class="offer-body">
+                    <p class="sub-text">Top Performer</p>
+                    <h3>Security Bank</h3>
+                    <div class="big-rate text-green">0.32%</div>
+                    <p class="sub-text">Security Bank Corporation</p>
+                    
+                    <div class="mini-table">
+                        <div class="row"><span>1. Security Bank</span> <span class="text-green">0.32%</span></div>
+                        <div class="row"><span>2. BPI</span> <span class="text-green">0.30%</span></div>
+                        <div class="row"><span>3. Metrobank</span> <span class="text-green">0.28%</span></div>
+                    </div>
+                </div>
+                <button class="btn-offer btn-green">Compare Rates</button>
+            </div>
+
+            <div class="card offer-card blue-theme">
+                <div class="offer-header">
+                    <i class="fa-solid fa-money-bill-transfer"></i> Lowest Loan Rate
+                </div>
+                <div class="offer-body">
+                    <p class="sub-text">Best Deal</p>
+                    <h3>LandBank</h3>
+                    <div class="big-rate text-blue">10.5%</div>
+                    <p class="sub-text">Land Bank of the Philippines</p>
+                    
+                    <div class="mini-table">
+                        <div class="row"><span>1. LandBank</span> <span class="text-blue">10.5%</span></div>
+                        <div class="row"><span>2. Security Bank</span> <span class="text-blue">11.2%</span></div>
+                        <div class="row"><span>3. PNB</span> <span class="text-blue">11.5%</span></div>
+                    </div>
+                </div>
+                <button class="btn-offer btn-blue">Compare Loans</button>
+            </div>
+
+            <div class="card offer-card orange-theme">
+                <div class="offer-header">
+                    <i class="fa-regular fa-credit-card"></i> Best Credit Card
+                </div>
+                <div class="offer-body">
+                    <p class="sub-text">Lowest Rate</p>
+                    <h3>LandBank</h3>
+                    <div class="big-rate text-orange">3%</div>
+                    <p class="sub-text">Land Bank of the Philippines</p>
+                    
+                    <div class="mini-table">
+                        <div class="row"><span>1. LandBank</span> <span class="text-orange">3%</span></div>
+                        <div class="row"><span>2. Security Bank</span> <span class="text-orange">3.1%</span></div>
+                        <div class="row"><span>3. PNB</span> <span class="text-orange">3.2%</span></div>
+                    </div>
+                </div>
+                <button class="btn-offer btn-orange">View Cards</button>
+            </div>
+        </div>
+
+        <div class="bottom-grid">
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-chart-column"></i> Market Overview</h3>
+                    <p class="sub-text">Top 5 banks comparison across key metrics</p>
+                </div>
+                <div class="css-chart">
+                    <div class="y-axis">
+                        <span>10</span><span>6</span><span>3</span><span>0</span>
+                    </div>
+                    <div class="chart-area">
+                        <div class="bar-group">
+                            <div class="bar green" style="height: 70%"></div>
+                            <div class="bar blue" style="height: 80%"></div>
+                            <div class="bar dark" style="height: 75%"></div>
+                            <span class="label">BPI</span>
+                        </div>
+                         <div class="bar-group">
+                            <div class="bar green" style="height: 65%"></div>
+                            <div class="bar blue" style="height: 78%"></div>
+                            <div class="bar dark" style="height: 70%"></div>
+                            <span class="label">BDO</span>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bar green" style="height: 72%"></div>
+                            <div class="bar blue" style="height: 82%"></div>
+                            <div class="bar dark" style="height: 68%"></div>
+                            <span class="label">Security Bank</span>
+                        </div>
+                         <div class="bar-group">
+                            <div class="bar green" style="height: 70%"></div>
+                            <div class="bar blue" style="height: 85%"></div>
+                            <div class="bar dark" style="height: 65%"></div>
+                            <span class="label">Metrobank</span>
+                        </div>
+                         <div class="bar-group">
+                            <div class="bar green" style="height: 60%"></div>
+                            <div class="bar blue" style="height: 75%"></div>
+                            <div class="bar dark" style="height: 62%"></div>
+                            <span class="label">RCBC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card leaders-card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Safety and Service Leaders</h3>
+                    <p class="sub-text">Top-rated banks for security and service quality</p>
+                </div>
+                
+                <p class="mini-header">Highest Safety Ratings</p>
+                <div class="leader-list blue-list">
+                    <div class="leader-item">
+                        <span><span class="sq-num">1</span> BPI</span>
+                        <span class="score">9.5/10</span>
+                    </div>
+                    <div class="leader-item">
+                        <span><span class="sq-num">2</span> BDO</span>
+                        <span class="score">9.1/10</span>
+                    </div>
+                    <div class="leader-item">
+                        <span><span class="sq-num">3</span> Metrobank</span>
+                        <span class="score">9/10</span>
+                    </div>
+                    <div class="leader-item">
+                        <span><span class="sq-num">4</span> Security Bank</span>
+                        <span class="score">9/10</span>
+                    </div>
+                </div>
+
+                <p class="mini-header" style="margin-top: 15px;">Highest Service Quality</p>
+                <div class="leader-list green-list">
+                    <div class="leader-item">
+                        <span><span class="sq-num-g">1</span> BPI</span>
+                        <span class="score">8.8/10</span>
+                    </div>
+                    <div class="leader-item">
+                        <span><span class="sq-num-g">2</span> Security Bank</span>
+                        <span class="score">8.5/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
