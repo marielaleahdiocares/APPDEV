@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h3>Step 3: Banking Preferences</h3>
+    <div class="sub-step-indicator">
+        <span class="dot completed"></span><span class="dot active"></span><span class="dot"></span>
+    </div>
+    <h4>Which banking services are you interested in?</h4>
+    <form method="POST" action="{{ url_for('survey_interest') }}">
+        <div class="checkbox-grid">
+            <label class="checkbox-item"><input type="checkbox" name="service" value="Savings">Savings Account</label>
+            <label class="checkbox-item"><input type="checkbox" name="service" value="Checking">Checking Account</label>
+            <label class="checkbox-item"><input type="checkbox" name="service" value="CreditCard">Credit Card</label>
+            <label class="checkbox-item"><input type="checkbox" name="service" value="Loans">Loans (Personal/Auto/Housing)</label>
+            <label class="checkbox-item"><input type="checkbox" name="service" value="Investment">Investment Products</label>
+            <label class="checkbox-item"><input type="checkbox" name="service" value="Insurance">Insurance</label>
+            <label class="checkbox-item"><input type="checkbox" name="service" value="Remittance">Remittance Services</label>
+            <label class="checkbox-item"><input type="checkbox" name="service" value="DigitalWallet">Digital Wallet</label>
+            <label class="checkbox-item"><input type="checkbox" name="service" value="BusinessBanking">Business Banking</label>
+            <!-- <label class="checkbox-item others">
+                <input type="checkbox" name="service" value="Others">
+                Others: <input type="text" name="other_service_name" placeholder="Specify other services...">
+            </label> -->
+        </div>
+        <div class="navigation-buttons">
+            <a href="{{ back_url }}" class="btn-back">← Back</a>
+            <button type="submit" class="btn-next">Next: Preference →</button>
+        </div>
+    </form>
+{% endblock %}

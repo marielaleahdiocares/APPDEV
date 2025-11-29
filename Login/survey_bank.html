@@ -1,0 +1,31 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h3>Step 3: Banking Preferences</h3>
+    <div class="sub-step-indicator">
+        <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <h4>Which bank(s) do you currently use?</h4>
+    <form method="POST" action="{{ url_for('survey_bank') }}">
+        <div class="checkbox-grid">
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="BDO">BDO Unibank</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="BPI">BPI</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="Metrobank">Metrobank</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="SecurityBank">Security Bank</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="UnionBank">UnionBank</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="LandBank">Land Bank</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="PNB">PNB</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="RCBC">RCBC</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="EastWestBank">EastWest Bank</label>
+            <label class="checkbox-item"><input type="checkbox" name="bank" value="Chinabank">Chinabank</label>
+            <!-- <label class="checkbox-item others">
+                <input type="checkbox" name="bank" value="Others">
+                Others: <input type="text" name="other_bank_name" placeholder="Specify other banks...">
+            </label> -->
+        </div>
+        <div class="navigation-buttons">
+            <a href="{{ url_for('user_type') }}" class="btn-back">← Back</a>
+            <button type="submit" class="btn-next">Next: Services →</button>
+        </div>
+    </form>
+{% endblock %}
