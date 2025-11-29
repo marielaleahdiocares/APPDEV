@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="SatisBank Logo">
+            </div>
+            
+            <nav class="menu">
+                <p>Menu</p>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-balance-scale"></i> Comparison</a></li>
+                    <li><a href="#"><i class="fas fa-lightbulb"></i> Recommendation</a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="#"><i class="fas fa-building-columns"></i> Bank Profile</a></li>
+                </ul>
+                <p>General</p>
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-user-circle"></i> Profile</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
+                </ul>
+            </nav>
+
+            <div class="help-center">
+                <i class="fas fa-question-circle"></i>
+                <p class="help-text">Help Center</p>
+                <p>Having trouble in SatisBank? Please contact us for more questions</p>
+                <button>Go To Help Center</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <h2>Profile</h2>
+            </header>
+            
+            <div class="tabs">
+                <button class="tab-button active">Account Details</button>
+                <button class="tab-button">Banking References</button>
+                <button class="tab-button">Saved Banks</button>
+            </div>
+
+            <div class="profile-details">
+                <h3>Profile picture</h3>
+                <div class="profile-picture-section">
+                    <img src="{{ user.profile_picture }}" alt="Profile Picture" class="profile-img">
+                    <button class="btn-secondary">Change picture</button>
+                    <button class="btn-link">Delete picture</button>
+                </div>
+                
+                <form class="account-form">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" value="{{ user.full_name }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="{{ user.email_address }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact Number</label>
+                        <input type="tel" id="contact" value="{{ user.contact_number }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address (Optional)</label>
+                        <input type="text" id="address" value="{{ user.address }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-type">Customer Type</label>
+                        <input type="text" id="customer-type" value="{{ user.customer_type }}" readonly>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-ghost">Edit Profile</button>
+                        <button type="submit" class="btn-primary" disabled>Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,266 @@
+/* General Reset and Font */
+:root {
+    --primary-color: #3f51b5; /* A shade of blue/indigo for primary actions */
+    --accent-color: #4CAF50; /* Green from the logo for a secondary action */
+    --background-color: #f7f9fc;
+    --card-background: #ffffff;
+    --text-color: #333;
+    --light-text: #666;
+    --sidebar-width: 250px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- Layout --- */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--card-background);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo img {
+    height: 40px; /* Adjust as needed */
+    margin-left: 30px;
+    margin-bottom: 40px;
+}
+
+.menu p {
+    color: var(--light-text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 10px 30px 5px;
+    text-transform: uppercase;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 30px;
+    text-decoration: none;
+    color: var(--light-text);
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+.menu a i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.menu li.active a {
+    color: var(--primary-color);
+    background-color: rgba(63, 81, 181, 0.1);
+    border-left: 4px solid var(--primary-color);
+    padding-left: 26px; /* Adjust for border */
+}
+
+/* --- Help Center --- */
+.help-center {
+    background-color: #e3f2fd; /* Light blue background */
+    border-radius: 8px;
+    padding: 20px;
+    margin: 40px 20px 0;
+    text-align: center;
+}
+
+.help-center .fas {
+    color: #42a5f5; /* Blue icon color */
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.help-center .help-text {
+    font-weight: 700;
+    color: #1e88e5;
+    margin-bottom: 5px;
+}
+
+.help-center p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.help-center button {
+    background-color: #42a5f5;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* --- Main Content --- */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.page-header h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+/* --- Tabs --- */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--light-text);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    background-color: #f0f3ff;
+}
+
+/* --- Profile Details Card --- */
+.profile-details {
+    background-color: var(--card-background);
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.profile-details h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Profile Picture Section */
+.profile-picture-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.btn-secondary {
+    background-color: var(--card-background);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--light-text);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 8px 10px;
+    font-weight: 400;
+}
+
+/* Form Styling */
+.account-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 40px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fafafa;
+    color: var(--text-color);
+}
+
+.form-group input:read-only {
+    background-color: #f0f0f0; /* Slightly darker background for readonly */
+    cursor: default;
+}
+
+/* Action Buttons */
+.form-actions {
+    grid-column: 1 / -1; /* Span across both columns */
+    display: flex;
+    justify-content: flex-end; /* Push buttons to the right */
+    padding-top: 20px;
+}
+
+.btn-ghost {
+    background: none;
+    border: 1px solid #ddd;
+    color: var(--light-text);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
