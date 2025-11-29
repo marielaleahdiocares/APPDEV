@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank - Bank Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bp.css') }}">
+</head>
+<body>
+
+<div class="app-container">
+    
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="logo-icon">S</span>atisBank
+        </div>
+        <div class="menu-label">Menu</div>
+        <ul class="nav-menu">
+            <li><a href="#"><i class="fa-solid fa-table-columns"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i> Comparison</a></li>
+            <li><a href="#"><i class="fa-solid fa-thumbs-up"></i> Recommendation</a></li>
+            <li><a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
+            <li class="active"><a href="#"><i class="fa-solid fa-building"></i> Bank Profile</a></li>
+        </ul>
+        <div class="menu-label">General</div>
+        <ul class="nav-menu">
+            <li><a href="#"><i class="fa-regular fa-user"></i> Profile</a></li>
+            <li><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a></li>
+        </ul>
+        <div class="help-box">
+            <div class="help-icon">?</div>
+            <h4>Help Center</h4>
+            <p>Having trouble in SatisBank? Please contact us.</p>
+            <button class="btn-white">Go To Help Center</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="top-header">
+            <h2>Bank Profile</h2>
+            <div class="user-actions">
+                <div class="icon-btn"><i class="fa-regular fa-bell"></i></div>
+                <div class="user-profile">
+                    <div class="avatar">XL</div>
+                    <span>Xyross Lee</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-scroll">
+            
+            <div class="card bank-details-card">
+                
+                <div class="details-header">
+                    <div class="bank-identity">
+                        <div class="bank-logo">
+                            <span class="bpi-text">BPI</span>
+                            <i class="fa-solid fa-building-columns small-icon"></i>
+                        </div>
+                        <div class="bank-titles">
+                            <h3>BPI <span class="badge">Bank of the Philippine Islands</span></h3>
+                            <p>One of the oldest banks in the Philippines, known for excellent customer service and innovation.</p>
+                        </div>
+                    </div>
+                    <button class="btn-bookmark"><i class="fa-solid fa-bookmark"></i> Book Marked</button>
+                </div>
+
+                <h4 class="section-title">Rating Metrics</h4>
+                <div class="metrics-grid">
+                    <div class="metric-box green">
+                        <div class="metric-icon"><i class="fa-solid fa-medal"></i> Satisfaction</div>
+                        <div class="metric-val">8.7/10</div>
+                    </div>
+                    <div class="metric-box orange">
+                        <div class="metric-icon"><i class="fa-solid fa-arrow-trend-up"></i> Service Quality</div>
+                        <div class="metric-val">8.8/10</div>
+                    </div>
+                    <div class="metric-box blue">
+                        <div class="metric-icon"><i class="fa-solid fa-shield-halved"></i> Safety Rating</div>
+                        <div class="metric-val">9.3/10</div>
+                    </div>
+                </div>
+
+                <h4 class="section-title">Interest Rate</h4>
+                <div class="rates-grid">
+                    <div class="rate-box light-green">
+                        <span>Savings Account</span>
+                        <span class="rate-val text-green">0.3%</span>
+                    </div>
+                    <div class="rate-box light-yellow">
+                        <span>Personal Loan</span>
+                        <span class="rate-val text-orange">11.8%</span>
+                    </div>
+                    <div class="rate-box light-blue">
+                        <span>Credit Card</span>
+                        <span class="rate-val text-blue">3.25%</span>
+                    </div>
+                </div>
+
+                <h4 class="section-title">Key Features</h4>
+                <div class="features-row">
+                    <span class="pill">Mobile Banking App</span>
+                    <span class="pill">Wealth management</span>
+                    <span class="pill">Premium Services</span>
+                    <span class="pill">Corporate Banking</span>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                
+                <div class="card chart-card">
+                    <div class="card-header-plain">
+                        <h4>Services Ratings</h4>
+                        <p>All banks safety comparison</p>
+                    </div>
+                    <div class="bar-chart-container">
+                        <div class="y-axis">
+                            <span>60</span><span>40</span><span>20</span><span>0</span>
+                        </div>
+                        <div class="bars-area">
+                            <div class="bar-col">
+                                <div class="bar" style="height: 85%;"></div>
+                                <span class="x-label">Credits Cards</span>
+                            </div>
+                            <div class="bar-col">
+                                <div class="bar" style="height: 88%;"></div>
+                                <span class="x-label">Savings</span>
+                            </div>
+                            <div class="bar-col">
+                                <div class="bar" style="height: 82%;"></div>
+                                <span class="x-label">Fees</span>
+                            </div>
+                            <div class="bar-col">
+                                <div class="bar" style="height: 86%;"></div>
+                                <span class="x-label">Rates</span>
+                            </div>
+                            <div class="bar-col">
+                                <div class="bar" style="height: 90%;"></div>
+                                <span class="x-label">Loans</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card chart-card">
+                    <div class="card-header-center">
+                        <h4>Overall Satisfaction Breakdown (Out of 10)</h4>
+                    </div>
+                    <div class="radar-container">
+                        <span class="radar-label label-top">Security</span>
+                        <span class="radar-label label-right">Transparency</span>
+                        <span class="radar-label label-bottom-right">Fee Honesty</span>
+                        <span class="radar-label label-bottom-left">Data Privacy</span>
+                        <span class="radar-label label-left">Stability</span>
+
+                        <svg viewBox="0 0 200 200" class="radar-svg">
+                            <polygon points="100,20 180,80 150,170 50,170 20,80" class="grid-lines" />
+                            <polygon points="100,50 160,95 140,150 60,150 40,95" class="grid-lines" />
+                            <polygon points="100,80 140,110 130,135 70,135 60,110" class="grid-lines" />
+                            
+                            <polygon points="100,30 170,85 145,160 55,165 25,85" class="data-shape" />
+                            
+                            <line x1="100" y1="100" x2="100" y2="20" class="axis-line" />
+                            <line x1="100" y1="100" x2="180" y2="80" class="axis-line" />
+                            <line x1="100" y1="100" x2="150" y2="170" class="axis-line" />
+                            <line x1="100" y1="100" x2="50" y2="170" class="axis-line" />
+                            <line x1="100" y1="100" x2="20" y2="80" class="axis-line" />
+                            
+                            <text x="100" y="90" font-size="6" text-anchor="middle">2</text>
+                            <text x="100" y="70" font-size="6" text-anchor="middle">4</text>
+                            <text x="100" y="50" font-size="6" text-anchor="middle">8</text>
+                            <text x="100" y="30" font-size="6" text-anchor="middle">10</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reviews-card">
+                <div class="reviews-header">
+                    <h4>What Customer Says</h4>
+                    <a href="#" class="view-all">View All Reviews</a>
+                </div>
+                <div class="review-item">
+                    <img src="https://placehold.co/50x50/333/fff?text=KC" alt="User" class="review-avatar">
+                    <div class="review-content">
+                        <h5>King Jamcent Casupang</h5>
+                        <p class="review-text">I couldn't send Instapay Transfers ... even BPI-to-BPI doesn't work on their app ... 'Sending Money In Progress' ... but it never pushes through.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
