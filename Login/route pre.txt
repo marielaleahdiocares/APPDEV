@@ -1,0 +1,7 @@
+# --- Analytics Route ---
+@app.route('/analytics')
+def analytics():
+    # In a real application, you would fetch all chart data from a database here
+    if 'user_email' in session or 'user_name' in session:
+        return render_template('analytics.html')
+    return redirect(url_for('login'))
