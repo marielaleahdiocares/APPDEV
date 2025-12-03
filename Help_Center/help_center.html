@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="header-top">
+  <span class="tab">Help Center</span>
+</div>
+
+<section class="hero">
+  <h1>Hello, How can we help?</h1>
+
+  <form action="{{ url_for('search') }}" class="search-form" method="get" role="search">
+    <div class="search-input">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="search" name="q" placeholder="Search for help articles, FAQs, or topics..." aria-label="Search">
+    </div>
+    <button class="search-btn" type="submit">Search</button>
+  </form>
+
+  <p class="choose">or choose a category to quickly find the help you need</p>
+
+  <div class="categories">
+    {% for cat in categories %}
+      <a href="{{ url_for('category_page', cat_key=cat.key) }}" class="cat-card">
+        <div class="cat-icon"><i class="fa {{ cat.icon }}"></i></div>
+        <div class="cat-title">{{ cat.title }}</div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="faq">
+  <h3>Popular Questions (FAQ Section)</h3>
+
+  <div class="accordion-list">
+    {% for cat, items in faqs.items() %}
+      {% for it in items %}
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span>{{ it.question }}</span>
+            <i class="fa fa-chevron-down arrow"></i>
+          </button>
+          <div class="accordion-panel">
+            <p>{{ it.answer }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+  <h3>Contact Support Section</h3>
+  <p>Need more help?</p>
+  <p>✉️ Email: support@satisbank.com</p>
+  <p>💬 Live Chat: Available 9 AM – 6 PM, Mon–Fri</p>
+  <p>📞 Hotline: (02) 123-4567</p>
+</section>
+
+{% endblock %}
