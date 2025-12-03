@@ -1,0 +1,4 @@
+@app.route('/')
+def index():
+    # Render the HTML template, passing a title variable
+    return render_template('landing.html', page_title="Modern Banking Landing Page")
