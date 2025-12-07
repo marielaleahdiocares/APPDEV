@@ -1,0 +1,516 @@
+/* General Reset and Base Styles */
+:root {
+    --primary-color: #4CAF50; /* Green from the logo */
+    --secondary-color: #2196F3; /* Blue for charts */
+    --background-color: #f4f7f9;
+    --card-background: #ffffff;
+    --text-color: #333;
+    --light-text-color: #666;
+    --border-color: #e0e0e0;
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- Dashboard Layout --- */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: 220px;
+    background-color: var(--card-background);
+    padding: 20px 0;
+    box-shadow: var(--shadow-light);
+    border-right: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    padding: 5px 12px;
+}
+
+.menu-heading {
+    color: var(--light-text-color);
+    font-size: 12px;
+    padding: 10px 20px 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.menu-list li a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: var(--light-text-color);
+    transition: background-color 0.2s;
+}
+
+.menu-list li a i.material-icons {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.menu-list li.active a,
+.menu-list li a:hover {
+    background-color: #e8f5e9; /* Light primary color background */
+    color: var(--primary-color);
+}
+
+.menu-list li.active {
+    border-right: 3px solid var(--primary-color);
+}
+
+/* Help Center Box */
+.help-center {
+    margin: 20px;
+    padding: 15px;
+    background-color: #e0f7fa; /* Light cyan background */
+    border-radius: 8px;
+    text-align: center;
+}
+
+.help-center .help-icon {
+    font-size: 24px;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.help-center p {
+    font-size: 12px;
+    color: var(--light-text-color);
+    margin-bottom: 10px;
+}
+
+.help-button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* --- Main Content --- */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Header */
+/* --- Header & Compact Action Styles --- */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header-actions-compact {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between bell and profile */
+}
+
+/* 🔔 Notification Icon Pill */
+.notification-icon-pill {
+    background-color: #E3F2FD; /* Light Blue Background */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-icon-pill .material-icons {
+    font-size: 20px;
+    color: #4285F4; /* Strong Blue Icon Color */
+}
+
+.notification-badge-small {
+    position: absolute;
+    top: 5px;
+    right: 9px;
+    width: 6px;
+    height: 6px;
+    background-color: #EF5350; /* Red dot */
+    border-radius: 50%;
+}
+
+/* 👤 User Profile Pill */
+.user-profile-pill {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px 5px 5px;
+    border-radius: 50px; /* Highly rounded pill shape */
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    box-shadow: none; /* No shadow needed for this simple component */
+    cursor: pointer;
+}
+
+.user-initials-pill {
+    background-color: #BBDEFB; /* Lighter Blue for initials background */
+    color: #4285F4; /* Strong Blue text color */
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 8px;
+    padding: 0;
+}
+
+.username-pill {
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+/* General Card Style */
+.card {
+    border: 1px solid gray;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 20px;
+}
+
+/* --- Bank Profile Card --- */
+.card.bank-profile-card {
+    padding: 25px; 
+}
+.bank-header {
+    display: flex;
+    align-items: flex-start; /* Align logo and info to the top */
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+.bank-full-name {
+    font-size: 12px;
+    color: #1565C0; /* Darker Blue text */
+    background-color: #E3F2FD; /* Light Blue Background */
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+    width: fit-content;
+    margin-left: 10px; /* Space between short name and pill */
+    display: inline-block;
+}
+
+/* --- Bank Profile Card Logo Styles (Fix for Bank Profile (3).png) --- */
+
+.bank-logo {
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Slightly rounded container */
+    margin-right: 15px;
+    flex-shrink: 0;
+    padding: 4px; /* Space inside the border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bankcom-logo {
+    width: 40px;
+    height: 40px;
+    /* The logo itself appears to be a natural rectangle in the image, 
+       so we are removing the circular radius */
+    /* REMOVED: border-radius: 50%; */ 
+    border-radius: 4px; /* Small radius for gentle corners if desired */
+    object-fit: contain;
+}
+
+/* Ensure the logo background (if any) is correct */
+.bank-info h2 {
+    /* ... existing styles ... */
+    display: inline-block; /* Helps align the logo background */
+}.bank-info {
+    flex-grow: 1;
+}
+
+.bank-info h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.bank-description {
+    font-size: 12px;
+    color: var(--light-text-color);
+}
+
+.bookmark-button {
+    background-color: white;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.bookmark-button i.material-icons {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 15px 0;
+}
+
+.section-title {
+    color: rgb(30, 58, 138);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.section-title1 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+/* Rating Metrics */
+/* --- Rating Metrics (Updated Pill Style) --- */
+.rating-metrics {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.metric-item {
+    flex: 1;
+    /* Increased padding and adjusted alignment to match the pill */
+    padding: 12px 20px; 
+    border-radius: 8px; /* High radius for a pill shape */
+    text-align: left;
+    color: white;
+    /* Use flexbox to align content horizontally */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.metric-label {
+    /* Adjusted font size and spacing */
+    font-size: 16px; 
+    font-weight: 500;
+    margin-bottom: 0; /* Remove vertical margin */
+    display: flex;
+    align-items: center;
+}
+
+.metric-icon {
+    /* Styles for the outline icon */
+    font-size: 20px;
+    margin-right: 8px;
+    /* Use 'outline' variant style if available, or just standard */
+}
+
+.metric-value {
+    /* Adjusted font size */
+    font-size: 18px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Metric Colors (from the image) */
+.metric-satisfaction { 
+    background-color: #4CAF50; /* Green */ 
+    border-radius: 10px; /* High radius */
+}
+.metric-service_quality { 
+    background-color: #FF9800; /* Orange */ 
+    border-radius: 10px;
+}
+.metric-safety_rating { 
+    background-color: #2196F3; /* Blue */ 
+    border-radius: 10px;
+}
+
+/* --- Interest Rate Grid (Updated Style) --- */
+
+/* Ensures grid structure remains */
+.interest-rate-grid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.rate-item {
+    flex: 1;
+    /* Increased padding and adjusted alignment to match the pill */
+    padding: 12px 20px; 
+    border-radius: 8px; /* High radius for a pill shape */
+    text-align: left;
+    color: white;
+    /* Use flexbox to align content horizontally */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rate-label {
+    /* Adjusted to match the visual hierarchy (smaller, lighter) */
+    font-size: 15px;
+    color: black; /* Darker grey for better readability */
+    margin-bottom: 5px;
+}
+
+.rate-value {
+    /* Highlight the number */
+    font-size: 20px;
+    font-weight: bold;
+    color: #333; /* Strong color for the rate value */
+}
+
+/* Rate Item Backgrounds (from the image) */
+.rate-savings_account { 
+    background-color: #e8f5e9; /* Light Green */ 
+}
+.rate-personal_loan { 
+    background-color: #fffde7; /* Lighter Yellow/Beige */ 
+}
+.rate-credit_card { 
+    background-color: #e3f2fd; /* Very Light Blue */ 
+}
+/* Key Features */
+.key-features {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.feature-tag {
+    color: rgb(30, 58, 138);
+    background-color: var(--background-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px solid gray;
+}
+
+/* --- Charts and Reviews Grid --- */
+.charts-and-reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-template-rows: auto auto; /* Two rows: charts, then review */
+    gap: 20px;
+}
+
+.services-card {
+    border: 1px solid gray;
+    grid-column: 1 / 2;
+    height: 350px; /* Fixed height for the chart */
+}
+
+.satisfaction-card {
+    grid-column: 2 / 3;
+    height: 350px; /* Fixed height for the chart */
+}
+
+.customer-says-card {
+    grid-column: 1 / 3; /* Spans both columns */
+}
+
+.chart-subtitle {
+    font-size: 12px;
+    color: var(--light-text-color);
+    margin-bottom: 10px;
+}
+
+.chart-container {
+    height: 100%;
+    min-height: 250px; /* Minimum height for chart canvas */
+    padding: 10px;
+}
+
+/* Customer Says */
+.customer-says-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.view-all {
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.review {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.reviewer-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.review-text {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    border-left: none;
+}

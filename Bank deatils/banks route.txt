@@ -1,0 +1,443 @@
+    
+# --- Real Data Placeholder ---
+# Data for the "Bank Profile" card
+bank_data = {
+    'name': 'BPI - Bank of the Philippine Islands',
+    'description': 'One of the oldest banks in the Philippines, known for excellent customer service and innovation.',
+    'rating_metrics': {
+        'Satisfaction': 8.7,
+        'Service Quality': 8.8,
+        'Safety Rating': 9.3
+    },
+    'interest_rate': {
+        'Savings Account': 0.3,
+        'Personal Loan': 11.8,
+        'Credit Card': 3.25
+    },
+    'key_features': ['Mobile Banking App', 'Wealth Management', 'Premium Services', 'Corporate Banking']
+}
+
+# Data for the "Services Ratings" bar chart (Chart.js will use this)
+service_ratings = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [59, 58, 57, 56, 55], # Scores out of 60
+    'max': 60 # Maximum value for the y-axis
+}
+
+# Data for the "Overall Satisfaction Breakdown" radar chart (Chart.js will use this)
+satisfaction_breakdown = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [7, 8, 5, 9, 8], # Scores out of 10
+    'max': 10 # Maximum value for the radar chart
+}
+# -----------------------------
+# --- Real Data Placeholder ---
+# Data for the compact Bank Profile card (Matches the new image)
+bank_data = {
+    'name': 'BPI',
+    'full_name': 'Bank of the Philippine Islands',
+    'description': 'One of the oldest banks in the Philippines, known for excellent customer service and innovation.',
+    'rating_metrics': {
+        'Satisfaction': 8.7,
+        'Service Quality': 8.8,
+        'Safety Rating': 9.3
+    },
+    'interest_rate': {
+        'Savings Account': 0.3,
+        'Personal Loan': 11.8,
+        'Credit Card': 3.25
+    },
+    'key_features': ['Mobile Banking App', 'Wealth management', 'Premium Services', 'Corporate Banking']
+}
+# ... (service_ratings and satisfaction_breakdown data remain the same) ...
+
+service_ratings = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [59, 58, 57, 56, 55], # Scores out of 60
+    'max': 60
+}
+
+satisfaction_breakdown = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [7, 8, 5, 9, 8], # Scores out of 10
+    'max': 10
+}
+# -----------------------------
+
+@app.route('/bpiprofile')
+def bpiprofile():
+    return render_template(
+        'bpi_profile.html',
+        bank_data=bank_data,
+        service_ratings=service_ratings,
+        satisfaction_breakdown=satisfaction_breakdown
+    )
+
+# --- BDO Profile Data Placeholder (Copy the data above here) ---
+bdo_data = {
+    'name': 'BDO',
+    'full_name': 'BDO Unibank, Inc.',
+    'description': 'The largest bank in the Philippines in terms of assets, loans, and deposits, known for its extensive network.',
+    'rating_metrics': {
+        'Satisfaction': 9.1,
+        'Service Quality': 8.5,
+        'Safety Rating': 9.5
+    },
+    'interest_rate': {
+        'Savings Account': 0.1,
+        'Personal Loan': 10.5,
+        'Credit Card': 3.0
+    },
+    'key_features': ['Largest Branch Network', 'Remittance Services', 'Corporate Banking', 'Investment Banking']
+}
+
+service_ratings_bdo = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [60, 57, 58, 55, 61],
+    'max': 65
+}
+
+satisfaction_breakdown_bdo = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [8, 9, 7, 7, 8],
+    'max': 10
+}
+# ------------------------------------------------------------------
+
+
+@app.route('/bdoprofile')
+def bdoprofile():
+    # Note: I am assuming you have a generic template like 'bank_details.html'
+    # that can handle different bank data.
+    return render_template(
+        'bdo_profile.html',
+        bank_data=bdo_data,
+        service_ratings=service_ratings_bdo,
+        satisfaction_breakdown=satisfaction_breakdown_bdo
+    )
+
+# --- China Bank Profile Data ---
+chinabank_data = {
+    'name': 'China Bank',
+    'full_name': 'China Banking Corporation',
+    'description': 'One of the leading private universal banks in the Philippines, focused on trade and corporate banking, with a growing consumer segment.',
+    'rating_metrics': {
+        'Satisfaction': 9.1,
+        'Service Quality': 8.5,
+        'Safety Rating': 9.5
+    },
+    'interest_rate': {
+        'Savings Account': 0.125,
+        'Personal Loan': 10.5,
+        'Credit Card': 3.0
+    },
+    'key_features': ['Trust Services', 'Wealth Management', 'Corporate Banking', 'Trade Finance']
+}
+
+service_ratings_chinabank = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [60, 57, 58, 55, 61],
+    'max': 65
+}
+
+satisfaction_breakdown_chinabank = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [8, 8, 7, 7, 8],
+    'max': 10
+}
+# ------------------------------
+@app.route('/chinabankprofile')
+def chinabankprofile():
+    return render_template(
+        'chinabank_profile.html',
+        bank_data=chinabank_data,
+        service_ratings=service_ratings_chinabank,
+        satisfaction_breakdown=satisfaction_breakdown_chinabank
+    )
+
+
+# --- Philippine National Bank Profile Data ---
+pnb_data = {
+    'name': 'Philippine National Bank',
+    'full_name': 'Philippine National Bank',
+    'description': 'One of the largest private universal banks in the Philippines, with a strong focus on serving Overseas Filipino Workers (OFW) and having a large international presence.',
+    'rating_metrics': {
+        'Satisfaction': 8.8,
+        'Service Quality': 8.3,
+        'Safety Rating': 9.2
+    },
+    'interest_rate': {
+        'Savings Account': 0.10,
+        'Personal Loan': 11.0,
+        'Credit Card': 3.0
+    },
+    'key_features': ['OFW Remittance Services', 'International Branches', 'Corporate Banking', 'Trust Banking']
+}
+
+service_ratings_pnb = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [62, 59, 63, 56, 57],
+    'max': 65
+}
+
+satisfaction_breakdown_pnb = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [9, 8, 9, 8, 7],
+    'max': 10
+}
+# ------------------------------
+
+@app.route('/pnbprofile')
+def pnbprofile():
+    return render_template(
+        'pnb_profile.html', # Assume a new template for PNB is created
+        bank_data=pnb_data,
+        service_ratings=service_ratings_pnb,
+        satisfaction_breakdown=satisfaction_breakdown_pnb
+    )
+
+# --- East West Banking Corporation Profile Data ---
+eastwest_data = {
+    'name': 'EastWest Bank',
+    'full_name': 'East West Banking Corporation',
+    'description': 'A key player in consumer lending in the Philippines, known for its focus on auto loans, credit cards, and other retail financial products.',
+    'rating_metrics': {
+        'Satisfaction': 8.5,
+        'Service Quality': 8.1,
+        'Safety Rating': 9.0
+    },
+    'interest_rate': {
+        'Savings Account': 0.15,
+        'Personal Loan': 12.0,
+        'Credit Card': 2.75
+    },
+    'key_features': ['High-Growth Consumer Lending', 'Auto Loans', 'Credit Card Products', 'Electronic Channels']
+}
+
+service_ratings_eastwest = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [61, 64, 55, 58, 56],
+    'max': 65
+}
+
+satisfaction_breakdown_eastwest = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [8, 7, 8, 7, 6],
+    'max': 10
+}
+# ------------------------------
+
+@app.route('/eastwestprofile')
+def eastwestprofile():
+    return render_template(
+        'eastwest_profile.html', # Assume a new template for EastWest is created
+        bank_data=eastwest_data,
+        service_ratings=service_ratings_eastwest,
+        satisfaction_breakdown=satisfaction_breakdown_eastwest
+    )
+
+# --- Security Bank Corporation Profile Data ---
+securitybank_data = {
+    'name': 'Security Bank',
+    'full_name': 'Security Bank Corporation',
+    'description': 'A leading universal bank in the Philippines recognized for its "BetterBanking" commitment, focusing on wholesale and retail markets, with strong treasury operations.',
+    'rating_metrics': {
+        'Satisfaction': 9.0,
+        'Service Quality': 9.2,
+        'Safety Rating': 9.4
+    },
+    'interest_rate': {
+        'Savings Account': 0.15,
+        'Personal Loan': 9.8,
+        'Credit Card': 2.5
+    },
+    'key_features': ['BetterBanking Service', 'Treasury & FX Services', 'High-Interest Deposit Products', 'Corporate Banking']
+}
+
+service_ratings_securitybank = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [63, 60, 62, 59, 61],
+    'max': 65
+}
+
+satisfaction_breakdown_securitybank = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [9, 8, 8, 9, 9],
+    'max': 10
+}
+# ------------------------------
+
+@app.route('/securitybankprofile')
+def securitybankprofile():
+    return render_template(
+        'securitybank_profile.html', # Assume a new template for Security Bank is created
+        bank_data=securitybank_data,
+        service_ratings=service_ratings_securitybank,
+        satisfaction_breakdown=satisfaction_breakdown_securitybank
+    )
+
+# --- Metropolitan Bank and Trust Company Profile Data ---
+metrobank_data = {
+    'name': 'Metrobank',
+    'full_name': 'Metropolitan Bank and Trust Company',
+    'description': 'One of the largest and most well-established universal banks in the Philippines, providing a full range of services from consumer banking to corporate and investment banking.',
+    'rating_metrics': {
+        'Satisfaction': 9.3,
+        'Service Quality': 8.9,
+        'Safety Rating': 9.6
+    },
+    'interest_rate': {
+        'Savings Account': 0.10,
+        'Personal Loan': 10.0,
+        'Credit Card': 3.0
+    },
+    'key_features': ['Investment Banking', 'Corporate Financing', 'Trust and Fiduciary Services', 'Large Branch Network']
+}
+
+service_ratings_metrobank = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [63, 61, 58, 60, 59],
+    'max': 65
+}
+
+satisfaction_breakdown_metrobank = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [9, 8, 9, 7, 8],
+    'max': 10
+}
+# ------------------------------
+
+@app.route('/metrobankprofile')
+def metrobankprofile():
+    return render_template(
+        'metrobank_profile.html', # Assume a new template for Metrobank is created
+        bank_data=metrobank_data,
+        service_ratings=service_ratings_metrobank,
+        satisfaction_breakdown=satisfaction_breakdown_metrobank
+    )
+
+# --- Rizal Commercial Banking Corporation Profile Data ---
+rcbc_data = {
+    'name': 'RCBC',
+    'full_name': 'Rizal Commercial Banking Corporation',
+    'description': 'A major universal bank in the Philippines providing comprehensive financial services, recognized for its commitment to digital innovation and customer-centric approach.',
+    'rating_metrics': {
+        'Satisfaction': 8.9,
+        'Service Quality': 8.7,
+        'Safety Rating': 9.1
+    },
+    'interest_rate': {
+        'Savings Account': 0.125,
+        'Personal Loan': 10.8,
+        'Credit Card': 2.8
+    },
+    'key_features': ['Digital Banking Platform (RCBC Pulz)', 'Wealth Management', 'Corporate Lending', 'Investment Products']
+}
+
+service_ratings_rcbc = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [64, 60, 58, 57, 56],
+    'max': 65
+}
+
+satisfaction_breakdown_rcbc = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [9, 8, 7, 7, 8],
+    'max': 10
+}
+# ------------------------------
+
+@app.route('/rcbcprofile')
+def rcbcprofile():
+    return render_template(
+        'rcbc_profile.html', # Assume a new template for RCBC is created
+        bank_data=rcbc_data,
+        service_ratings=service_ratings_rcbc,
+        satisfaction_breakdown=satisfaction_breakdown_rcbc
+    )
+
+# --- Bank of Commerce Profile Data ---
+bankcom_data = {
+    'name': 'Bank of Commerce',
+    'full_name': 'Bank of Commerce (BankCom)',
+    'description': 'A progressive universal bank in the Philippines and the banking arm of the San Miguel Corporation (SMC) group, providing a full range of services from corporate banking to consumer loans and digital channels.',
+    'rating_metrics': {
+        'Satisfaction': 8.6,
+        'Service Quality': 8.5,
+        'Safety Rating': 9.2
+    },
+    'interest_rate': {
+        # Based on a common rate for a P5,000+ ADB account
+        'Savings Account': 0.125,
+        # Illustrative rate for Personal Loans
+        'Personal Loan': 11.5,
+        # Credit Card finance charge is typically 3%
+        'Credit Card': 3.0
+    },
+    'key_features': ['San Miguel Corporation (SMC) Affiliate', 'Corporate and Trade Finance', 'Digital Banking (BankCom [Personal])', 'Consumer Loans (Auto/Home)']
+}
+
+service_ratings_bankcom = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [62, 63, 59, 60, 58],
+    'max': 65
+}
+
+satisfaction_breakdown_bankcom = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [9, 8, 8, 7, 7],
+    'max': 10
+}
+# ------------------------------
+
+@app.route('/bankcomprofile')
+def bankcomprofile():
+    return render_template(
+        'bankcom_profile.html', # Assume a new template for Bank of Commerce is created
+        bank_data=bankcom_data,
+        service_ratings=service_ratings_bankcom,
+        satisfaction_breakdown=satisfaction_breakdown_bankcom
+    )
+
+# --- Land Bank of the Philippines Profile Data ---
+landbank_data = {
+    'name': 'Landbank',
+    'full_name': 'Land Bank of the Philippines',
+    'description': 'A government-owned and controlled corporation (GOCC) and the second largest bank in the Philippines, primarily focused on serving the needs of farmers, fishermen, and the agricultural sector, while also offering universal banking services.',
+    'rating_metrics': {
+        'Satisfaction': 8.7,
+        'Service Quality': 8.0,
+        'Safety Rating': 9.5
+    },
+    'interest_rate': {
+        # Standard savings rate for most large banks
+        'Savings Account': 0.10,
+        # Illustrative rate for Personal Loans
+        'Personal Loan': 10.5,
+        # Credit Card finance charge is typically 3%
+        'Credit Card': 3.0
+    },
+    'key_features': ['Agricultural Lending', 'Rural Development Financing', 'Government Payroll and Disbursements', 'Extensive Provincial Branch Network']
+}
+
+service_ratings_landbank = {
+    'labels': ['Credit Cards', 'Savings', 'Fees', 'Rates', 'Loans'],
+    'data': [64, 63, 62, 65, 55],
+    'max': 65
+}
+
+satisfaction_breakdown_landbank = {
+    'labels': ['Security', 'Stability', 'Data Privacy', 'Fee Honesty', 'Transparency'],
+    'data': [9, 9, 8, 6, 9],
+    'max': 10
+}
+# ------------------------------
+
+@app.route('/landbankprofile')
+def landbankprofile():
+    return render_template(
+        'landbank_profile.html', # Assume a new template for Landbank is created
+        bank_data=landbank_data,
+        service_ratings=service_ratings_landbank,
+        satisfaction_breakdown=satisfaction_breakdown_landbank
+    )

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Profile Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='pnb_profile.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">S</span>
+            </div>
+            <div class="menu-heading">Menu</div>
+            <ul class="menu-list">
+                <li><a href="#"><i class="material-icons">dashboard</i> Dashboard</a></li>
+                <li><a href="#"><i class="material-icons">compare</i> Comparison</a></li>
+                <li><a href="#"><i class="material-icons">thumb_up_alt</i> Recommendation</a></li>
+                <li><a href="#"><i class="material-icons">analytics</i> Analytics</a></li>
+                <li class="active"><a href="#"><i class="material-icons">account_balance</i> Bank Profile</a></li>
+            </ul>
+            <div class="menu-heading">General</div>
+            <ul class="menu-list">
+                <li><a href="#"><i class="material-icons">person</i> Profile</a></li>
+                <li><a href="#"><i class="material-icons">logout</i> Log out</a></li>
+            </ul>
+            <div class="help-center">
+                <i class="material-icons help-icon">help_outline</i>
+                <p>Having trouble viewing your bank profile? Contact us for more questions.</p>
+                <a href="#" class="help-button">Go To Help Center</a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <!-- NEW BACK BUTTON -->
+                    <a href="javascript:history.back()" class="back-button">
+                        <i class="material-icons">arrow_back</i>
+                    </a>
+                    <h1 class="page-title">Bank Profile</h1>
+                </div>
+                
+                <div class="header-actions-compact">
+                    
+                    <div class="notification-icon-pill">
+                        <i class="material-icons">notifications</i>
+                        <span class="notification-badge-small"></span>
+                    </div>
+                    
+                    <div class="user-profile-pill">
+                        <span class="user-initials-pill">XL</span>
+                        <span class="username-pill">Xyross Lee</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="card bank-profile-card">
+                <div class="bank-header">
+                        <div class="bank-logo">
+                            <img src="{{ url_for('static', filename='pnb.png') }}" alt="pnb Logo" class="pnb-logo">
+                        </div>
+                        <div class="bank-info">
+                            <h2 class="bank-short-name">{{ bank_data.name }}</h2>
+                            <span class="bank-full-name">{{ bank_data.full_name }}</span>
+                            <p class="bank-description">{{ bank_data.description }}</p>
+                        </div>
+                        <button class="bookmark-button">
+                            <i class="material-icons">bookmark</i> Book Marked
+                        </button>
+                    </div>
+
+                <hr class="separator">
+
+                <div class="section-title">Rating Metrics</div>
+                <div class="rating-metrics">
+                    {% for key, value in bank_data.rating_metrics.items() %}
+                    <div class="metric-item metric-{{ key | replace(' ', '_') | lower }}">
+                        <div class="metric-label">
+                            <i class="material-icons metric-icon">
+                                {% if key == 'Satisfaction' %}
+                                    workspace_premium
+                                {% elif key == 'Service Quality' %}
+                                    trending_up
+                                {% elif key == 'Safety Rating' %}
+                                    security
+                                {% endif %}
+                            </i>
+                            {{ key }}
+                        </div>
+                        <div class="metric-value">{{ value }}/10</div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="section-title">Interest Rate</div>
+                <div class="interest-rate-grid">
+                    {% for key, value in bank_data.interest_rate.items() %}
+                    <div class="rate-item rate-{{ key | replace(' ', '_') | lower }}">
+                        <div class="rate-label">{{ key }}</div>
+                        <div class="rate-value">{{ value }}%</div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="section-title">Key Features</div>
+                <div class="key-features">
+                    {% for feature in bank_data.key_features %}
+                    <span class="feature-tag">{{ feature }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="charts-and-reviews-grid">
+                <div class="card services-card">
+                    <div class="section-title">Services Ratings</div>
+                    <p class="chart-subtitle">Ratings by service category</p>
+                    <div class="chart-container">
+                        <canvas id="serviceRatingsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card satisfaction-card">
+                    <div class="section-title">Overall Satisfaction Breakdown (Out of 10)</div>
+                    <div class="chart-container">
+                        <canvas id="satisfactionBreakdownChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card customer-says-card">
+                    <div class="customer-says-header">
+                        <div class="section-title1">What Customer Says</div>
+                        <a href="#" class="view-all">View All Reviews</a>
+                    </div>
+                    <div class="review">
+                        <div class="reviewer-name">King Jamcent Casupang</div>
+                        <blockquote class="review-text">
+                            I couldn't send Instapay Transfers ... even BPI-to-BPI doesn't work on their app ... "Sending Money in Progress" ... but it never pushes through.
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data injected from Flask
+        const serviceData = JSON.parse('{{ service_ratings | tojson }}');
+        const satisfactionData = JSON.parse('{{ satisfaction_breakdown | tojson }}');
+
+        // --- Services Ratings Bar Chart ---
+        const serviceRatingsCtx = document.getElementById('serviceRatingsChart');
+        new Chart(serviceRatingsCtx, {
+            type: 'bar',
+            data: {
+                labels: serviceData.labels,
+                datasets: [{
+                    label: 'Score',
+                    data: serviceData.data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)', // Blue color
+                    borderRadius: 8,
+                    barPercentage: 0.8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: serviceData.max,
+                        grid: { display: false },
+                        border: { display: false },
+                        ticks: { display: false } // Hide Y-axis ticks
+                    },
+                    x: {
+                        grid: { display: false },
+                        border: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: true }
+                }
+            }
+        });
+
+        // --- Overall Satisfaction Breakdown Radar Chart ---
+        const satisfactionCtx = document.getElementById('satisfactionBreakdownChart');
+        new Chart(satisfactionCtx, {
+            type: 'radar',
+            data: {
+                labels: satisfactionData.labels,
+                datasets: [{
+                    label: 'Satisfaction Score',
+                    data: satisfactionData.data,
+                    fill: true,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Light Teal
+                    borderColor: 'rgb(75, 192, 192)',
+                    pointBackgroundColor: 'rgb(75, 192, 192)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(75, 192, 192)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                    line: { borderWidth: 2 }
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: false },
+                        suggestedMin: 0,
+                        suggestedMax: satisfactionData.max,
+                        pointLabels: {
+                            font: { size: 10 } // Smaller font for labels
+                        },
+                        ticks: {
+                            stepSize: 2,
+                            display: true, // Show the 2, 4, 6, 8, 10 axis labels
+                            backdropColor: 'rgba(255, 255, 255, 0.8)',
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }, // Hide the legend
+                }
+            }
+        });
+    </script>
+</body>
+</html>
