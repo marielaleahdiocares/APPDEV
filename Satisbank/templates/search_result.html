@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="back" href="{{ url_for('help_center') }}">&larr; Back to Help Center</a>
+
+<h2>Search results for "{{ query }}"</h2>
+
+{% if results %}
+  <div class="results-grid">
+    {% for r in results %}
+      <div class="result-card">
+        <h4>{{ r.question }}</h4>
+        <p class="subtle">Category: {{ r.category.replace('-', ' ') | title }}</p>
+        <p>{{ r.answer }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No results found for "{{ query }}". Try another keyword.</p>
+{% endif %}
+{% endblock %}

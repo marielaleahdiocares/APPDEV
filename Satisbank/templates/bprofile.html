@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bprofile.css') }}">
+
+</head>
+<body>
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"> <img src="{{ url_for('static', filename='images/logo_text.png') }}" class="text-logo" >
+
+        </div>
+
+        <h4>Menu</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('home') }}">Dashboard </a>
+            <a href="{{ url_for('comparison') }}">Comparison</a>
+            <a href="{{ url_for('reco') }}">Recommendation</a>
+            <a href="{{ url_for('analysis') }}" >Analytics</a>
+            <a href="{{ url_for('bprofile') }}" class="active">Bank Profile</a>
+        </nav>
+
+        <h4>General</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Log out</a>
+        </nav>
+        
+        <div class="help-card">
+            <h5>Help Center</h5>
+            <p style="font-size: 0.8rem; color: #6c757d;">Having trouble? Check out our FAQ or chat with support.</p>
+            <a href="{{ url_for('help_center') }}"><button>Go to Help Center</button></a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="top-header">
+            <h2>Bank Profile</h2>
+            <div class="user-actions">
+                <div class="icon-btn"><i class="fa-regular fa-bell"></i><div class="notif-dot"></div></div>
+                <div class="user-profile">
+                    <div class="avatar">XL</div>
+                    <span>{{ user.firstName }} {{ user.lastName}}</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-scroll">
+            <div class="bank-grid">
+                
+                <div class="bank-card">
+                    <div class="logo-box bg-bdo">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/bdo.png') }}" 
+                                alt="bdo" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>Banco de Oro Unibank</h3>
+                        <a class="btn-view" href="{{ url_for('bdo_profile') }}">View Details</a>
+                    </div>
+                </div>
+            
+
+                <div class="bank-card">
+                    <div class="logo-box bg-china">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/cb.jpg') }}" 
+                                alt="ChinaBank" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>China Banking Corporation</h3>
+                        <a class="btn-view" href="{{ url_for('cbank_profile') }}">View Details</a>
+                    </div>
+                </div>
+
+                <div class="bank-card">
+                    <div class="logo-box bg-pnb">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/pnb.png') }}" 
+                                alt="pnb" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>Philippine National Bank</h3>
+                        <a class="btn-view" href="{{ url_for('pnb_profile') }}">View Details</a>
+                    </div>
+                </div>
+
+                <div class="bank-card">
+                    <div class="logo-box bg-eastwest">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/eastwest.jpg') }}" 
+                                alt="eastwest" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>East West Banking Corporation</h3>
+                        <a class="btn-view" href="{{ url_for('eastwest_profile') }}">View Details</a>
+                    </div>
+                </div>
+
+                <div class="bank-card">
+                    <div class="logo-box bg-security">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/secbank.jpeg') }}" 
+                                alt="secbank" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>Security Bank Corporation</h3>
+                        <a class="btn-view" href="{{ url_for('secbank_profile') }}">View Details</a>
+                    </div>
+                </div>
+
+                <div class="bank-card">
+                    <div class="logo-box bg-metrobank">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/metrobank.png') }}" 
+                                alt="rcbc" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>Metropolitan Bank and Trust Company</h3>
+                        <a class="btn-view" href="{{ url_for('metrobank_profile') }}">View Details</a>
+                    </div>
+                </div>
+ 
+                <div class="bank-card">
+                    <div class="logo-box bg-rcbc">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/rcbc.jpg') }}" 
+                                alt="rcbc" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>Rizal Commercial Banking Corporation</h3>
+                        <a class="btn-view" href="{{ url_for('rcbc_profile') }}">View Details</a>
+                    </div>
+                </div>
+           
+                <div class="bank-card">
+                    <div class="logo-box bg-commerce">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/boc.jpg') }}" 
+                                alt="Bank of Commerce" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>Bank of Commerce</h3>
+                        <a class="btn-view" href="{{ url_for('boc_profile') }}">View Details</a>
+                    </div>
+                </div>
+
+                <div class="bank-card">
+                    <div class="logo-box bg-landbank">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/landbank.jpg') }}" 
+                                alt="landbank" class="bank-logo">
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>Land bank of the Philippines</h3>
+                        <a class="btn-view" href="{{ url_for('landbank_profile') }}">View Details</a>
+                    </div>
+                </div>
+
+                <div class="bank-card">
+                    <div class="logo-box bg-bpi">
+                        <div class="logo-col">
+                            <img src="{{ url_for('static', filename='images/bpi.jpg') }}" 
+                                alt="Bpi" class="bank-logo">
+        
+                        </div>
+                        <div class="bookmark-ribbon"></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Bank of the philippine Islands</h3>
+                        <a class="btn-view" href="{{ url_for('bpiprofile') }}">View Details</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+  
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+             
+         <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"> <img src="{{ url_for('static', filename='images/logo_text.png') }}" class="text-logo" >
+
+        </div>
+
+            <h4>Menu</h4>
+            <nav class="sidebar-menu">
+                <a href="{{ url_for('home') }}" >Dashboard</a>
+                <a href="{{ url_for('comparison') }}">Comparison</a>
+                <a href="{{ url_for('reco') }}">Recommendation</a>
+                <a href="{{ url_for('analysis') }}" >Analytics</a>
+                <a href="{{ url_for('bprofile') }}">Bank Profile</a>
+            </nav>
+
+            <h4>General</h4>
+            <nav class="sidebar-menu">
+                <a href="{{ url_for('profile') }}" class="active">Profile</a>
+                <a href="{{ url_for('logout') }}">Log out</a>
+            </nav>
+            
+            <div class="help-card">
+                <h5>Help Center</h5>
+                <p style="font-size: 0.8rem; color: #6c757d;">Having trouble? Check out our FAQ or chat with support.</p>
+                <a href="{{ url_for('help_center') }}"><button>Go to Help Center</button></a>
+            </div>
+        </aside>
+            
+        <main class="main-content">
+            <header class="page-header">
+                <h2>Profile</h2>
+            </header>
+            
+            <div class="tabs">
+                <button class="tab-button active">Account Details</button>
+                <a class="tab-button" href="{{ url_for('references') }}">Banking References</a>
+                <button class="tab-button">Saved Banks</button>
+            </div>
+
+            <div class="profile-details">
+                <h3>Profile picture</h3>    
+                <div class="profile-picture-section">
+                    <img src="{{ url_for('static', filename='images/profilepic.jpg') }}" class="profilepic">
+                    <button class="btn-secondary">Change picture</button>
+                    <button class="btn-link">Delete picture</button>
+                </div>
+                <form class="account-form" method="POST">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="firstName" value="{{ user.firstName }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="lastName" value="{{ user.lastName }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact Number</label>
+                        <input type="tel" id="contact" name="contactNo" value="{{ user.contactNo }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address (Optional)</label>
+                        <input type="text" id="address" name="address" value="{{ user.Address }}" readonly>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-ghost">Edit Profile</button>
+                        <button type="submit" class="btn-primary" disabled>Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const editBtn = document.querySelector(".btn-ghost");
+    const saveBtn = document.querySelector(".btn-primary");
+    const inputs = document.querySelectorAll(".account-form input");
+
+    editBtn.addEventListener("click", () => {
+        inputs.forEach(input => input.removeAttribute("readonly"));
+        saveBtn.removeAttribute("disabled");
+        editBtn.style.display = "none";
+    });
+
+    saveBtn.addEventListener("click", () => {
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='analysis.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body class="dashboard-layout">
+
+    
+     <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"> <img src="{{ url_for('static', filename='images/logo_text.png') }}" class="text-logo" >
+
+        </div>
+
+        <h4>Menu</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('home') }}">Dashboard </a>
+            <a href="{{ url_for('comparison') }}">Comparison</a>
+            <a href="{{ url_for('reco') }}">Recommendation</a>
+            <a href="{{ url_for('analysis') }}" class="active">Analytics</a>
+            <a href="{{ url_for('bprofile') }}">Bank Profile</a>
+        </nav>
+
+        <h4>General</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Log out</a>
+        </nav>
+        
+        <div class="help-card">
+            <h5>Help Center</h5>
+            <p style="font-size: 0.8rem; color: #6c757d;">Having trouble? Check out our FAQ or chat with support.</p>
+            <a href="{{ url_for('help_center') }}"><button>Go to Help Center</button></a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="top-bar">
+            <h1>Analytics</h1>
+            <div class="user-profile">
+                <span class="avatar">XL</span>
+                <span>{{ user. firstName }} {{ user.lastName }}</span>
+                <i class="fas fa-bell" style="color: #6c757d;"></i>
+            </div>
+        </header>
+
+        <div class="analytics-grid">
+            
+            <div class="chart-card">
+                <h5>Interest Rate by Service Type</h5>
+                <p style="font-size: 0.8rem; color: #6c757d;">Comparative interest rate analysis.</p>
+                
+                <div class="chart-container">
+                    <canvas id="interestRateChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+
+            <div class="top-metrics-grid">
+                <div class="metric-card satisfaction">
+                    <h6><i class="fas fa-smile"></i> Overall Satisfaction</h6>
+                    <div class="score">8.0/10</div>
+                    <p class="change">+2.5% last period</p>
+                </div>
+                <div class="metric-card trust">
+                    <h6><i class="fas fa-handshake"></i> Trust & Reliability</h6>
+                    <div class="score">8.9/10</div>
+                    <p class="change">Satisfactory average</p>
+                </div>
+                <div class="metric-card digital">
+                    <h6><i class="fas fa-mobile-alt"></i> Digital Banking Quality</h6>
+                    <div class="score">8.0/10</div>
+                    <p class="change">-0.1% last period</p>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                    <h5>Bank Performance Comparison</h5>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="comparisonBarChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+
+            <div class="chart-card">
+                <h5>Digital Banking Quality (App Ratings)</h5>
+                <div class="chart-container" style="height: 300px; margin-top: 15px;">
+                    <canvas id="digitalQualityChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+
+            <div class="two-col-grid">
+                <div class="chart-card">
+                    <h5>Overall Customer Satisfaction (All Banks)</h5>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="satisfactionDoughnutChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h5>Trend Analysis (Yearly)</h5>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="trendAreaChart" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div> </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data matching the line chart in your ANALYTICS.png image
+            const chartData = {
+                labels: ['BPI', 'Metrobank', 'BDO', 'Chinabank', 'LandBank', 'RCBC', 'PNB', 'Security Bank', 'PhilTrust Bank', 'Bank of Commerce'],
+                datasets: [
+                    {
+                        label: 'Savings Rate (%)',
+                        data: [1.5, 1, 2.5, 2, 0.5, 1.5, 3, 1, 1.5, 2.5],
+                        borderColor: 'rgba(2, 62, 138, 1)',
+                        backgroundColor: 'rgba(2, 62, 138, 0.6)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5
+                    },
+                    {
+                        label: 'Credit Card Rate (%)',
+                        data: [5, 4.5, 6, 5.5, 4, 5, 6.5, 4.5, 5, 6],
+                        borderColor: 'rgba(0, 180, 216, 1)', 
+                        backgroundColor: 'rgba(0, 180, 216, 0.6)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5
+                    },
+                    {
+                        label: 'Loan Rate (%)',
+                        data: [8, 9, 7.5, 9.5, 8.5, 9, 8, 7, 7, 8.5],
+                        borderColor: 'rgba(72, 202, 228, 1)', 
+                        backgroundColor: 'rgba(72, 202, 228, 0.6)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5
+                    }
+                ]
+            };
+
+            // --- Bank Performance Comparison Bar Chart (Chart 3) ---
+            const comparisonBarLabels = ['BPI', 'Metrobank', 'BDO', 'Chinabank', 'Landbank', 'RCBC', 'PNB', 'PhilTrust Bank', 'Bank of Commerce', 'Security Bank'];
+
+            const comparisonBarData = {
+                labels: comparisonBarLabels,
+                datasets: [
+                    {   
+                        label: 'Digital',
+                        data: [7.8, 8.5, 7.0, 9.2, 6.5, 8.0, 7.5, 9.4, 8.7, 6.3],
+                        backgroundColor: '#073b3a',
+                    },
+                    {
+                        label: 'Satisfaction',
+                        data: [8.2, 8.0, 7.8, 9.0, 7.0, 8.5, 8.0, 9.2, 9.0, 7.9],
+                        backgroundColor: '#0b6e4f',
+                    },
+                    {
+                        label: 'Trust',
+                        data: [7.5, 7.9, 7.2, 8.5, 6.0, 7.8, 7.0, 8.0, 8.1, 7.8],
+                        backgroundColor: '#08a045',
+                    },
+                    {
+                        label: 'Value',
+                        data: [8.0, 8.1, 7.5, 9.5, 6.8, 8.2, 7.2, 8.5, 7.9, 9.1],
+                        backgroundColor: '#6bbf59',
+                    }
+                ]
+            };
+
+            // --- Digital Banking Quality Horizontal Bar Chart (Chart 4) ---
+
+            const customColors = [
+                '#0d47a1', 
+                '#1565c0', 
+                '#1976d2', 
+                '#1e88e5',
+                '#2196f3', 
+                '#42a5f5', 
+                '#64b5f6', 
+                '#90caf9', 
+                '#bbdefb', 
+                '#e3f2fd',
+            ];
+
+            const digitalQualityData = {
+                // Banks are the labels (Y-axis) in a horizontal chart
+                labels: ['BPI', 'Metrobank', 'Security Bank', 'BDO', 'Landbank', 'ChinaBank', 'RCBC', 'Bank of Commerce', 'PNB', 'PhilTrust Bank'],
+                datasets: [{
+                    label: 'App Rating Score',
+                    data: [4.8, 2.1, 3.0, 3.5, 4.5, 2.9, 3.1, 3.6, 2.6, 0], // Sample ratings out of 5
+                    backgroundColor: customColors, // Use the defined custom colors
+                    borderColor: customColors.map(color => color),
+                    borderWidth: 1,
+                }]
+            };
+
+            // --- Overall Customer Satisfaction Doughnut Chart (Chart 5) ---
+
+            const satisfactionData = {
+                labels: ['Very Satisfied', 'Satisfied', 'Neutral', 'Dissatisfied'],
+                datasets: [{
+                    label: 'Customer Count',
+                    data: [45, 30, 15, 10], // Percentages summing to 100
+                    backgroundColor: [
+                        '#880d1e',
+                        '#dd2d4a', 
+                        '#f26a8d', 
+                        '#f49cbb'  
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+
+            // --- Trend Analysis (Yearly) Area Chart (Chart 6) ---
+
+            const trendData = {
+                labels: ['2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'Trust',
+                    data: [3.5, 4.0, 4.2, 4.5, 5.0], 
+                    backgroundColor: 'rgba(0, 128, 0, 0.4)',
+                    borderColor: 'rgba(0, 128, 0, 1)',
+                    tension: 0.4,
+                    fill: true, 
+                },
+                {
+                    label: 'Satisfaction',
+                    data: [5.5, 6.0, 6.2, 6.5, 7.0], 
+                    backgroundColor: 'rgba(56, 176, 0, 0.4)', 
+                    borderColor: 'rgba(56, 176, 0, 1)',
+                    tension: 0.4,
+                    fill: true,
+                },
+                {
+                    label: 'Digital Security Index',
+                    data: [7.5, 8.0, 8.2, 8.5, 9.0],
+                    backgroundColor: 'rgba(112, 224, 0, 0.4)', 
+                    borderColor: 'rgba(112, 224, 0, 1)',
+                    tension: 0.4,
+                    fill: true,
+                }
+            ]
+            };
+
+            //Interest Rate by Service Type
+            const chartConfig = {
+                type: 'line',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                            }
+                        },
+                        title: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: 'Comparative Interest Rate Analysis'
+                            }
+                        }
+                    }
+                }
+            };
+
+            //Bank and Performace Comparison
+            const comparisonBarConfig = {
+                type: 'bar', // Type is 'bar'
+                data: comparisonBarData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: false,
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: false, // Not stacked, bars are side-by-side
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: 'Score out of 10'
+                            }
+                        }
+                    }
+                }
+            };
+
+            //Digital Banking Quality
+            const digitalQualityConfig = {
+                type: 'bar',
+                data: digitalQualityData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // CRITICAL: Makes the chart horizontal
+                    elements: {
+                        bar: {
+                            borderWidth: 2,
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false, // Hide the legend as it's a single dataset
+                        },
+                        title: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 5, // Max rating score
+                            title: {
+                                display: true,
+                                text: 'Rating Score (out of 5.0)'
+                            }
+                        },
+                        y: {
+                            // Y-axis labels (Bank names)
+                        }
+                    }
+                }
+            };
+
+            //Overall Customer Satisfaction
+            const satisfactionConfig = {
+                type: 'doughnut', // Type is 'doughnut'
+                data: satisfactionData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right', // Place legend on the right side
+                            labels: {
+                                usePointStyle: true,
+                            }
+                        },
+                        title: {
+                            display: false
+                        }
+                    }
+                }
+            };
+
+            //Trend Analysis
+            const trendConfig = {
+                type: 'line', // Use type 'line'
+                data: trendData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                            }
+                        },
+                        title: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: 'Index Value (out of 10)'
+                            }
+                        }
+                    }
+                }
+            };
+
+            //Interest Rate by Service Type
+            const ctx = document.getElementById('interestRateChart').getContext('2d');
+            new Chart(ctx, chartConfig);
+
+            //Bank and Performace Comparison
+            const comparisonCtx = document.getElementById('comparisonBarChart').getContext('2d');
+            new Chart(comparisonCtx, comparisonBarConfig);
+
+            //Digital Banking Quality
+            const digitalCtx = document.getElementById('digitalQualityChart').getContext('2d');
+            new Chart(digitalCtx, digitalQualityConfig);
+
+            //Overall Customer Satisfaction
+            const satisfactionCtx = document.getElementById('satisfactionDoughnutChart').getContext('2d');
+            new Chart(satisfactionCtx, satisfactionConfig);
+
+            //Trend Analysis
+            const trendCtx = document.getElementById('trendAreaChart').getContext('2d');
+            new Chart(trendCtx, trendConfig);
+
+        });
+    </script>
+</body>
+</html>

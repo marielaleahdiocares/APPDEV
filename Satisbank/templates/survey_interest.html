@@ -1,0 +1,48 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h3>Step 3: Banking Preferences</h3>
+    <div class="sub-step-indicator">
+        <span class="dot completed"></span><span class="dot active"></span><span class="dot"></span>
+    </div>
+    <h4>Which banking services are you interested in?</h4>
+    <form method="POST" action="{{ url_for('survey_interest') }}">
+        <div class="checkbox-grid">
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="Savings" {% if 'Savings' in selected_services %}checked{% endif %}> Savings Account
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="Checking" {% if 'Checking' in selected_services %}checked{% endif %}> Checking Account
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="CreditCard" {% if 'CreditCard' in selected_services %}checked{% endif %}> Credit Card
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="Loans" {% if 'Loans' in selected_services %}checked{% endif %}> Loans (Personal/Auto/Housing)
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="Investment" {% if 'Investment' in selected_services %}checked{% endif %}> Investment Products
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="Insurance" {% if 'Insurance' in selected_services %}checked{% endif %}> Insurance
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="Remittance" {% if 'Remittance' in selected_services %}checked{% endif %}> Remittance Services
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="DigitalWallet" {% if 'DigitalWallet' in selected_services %}checked{% endif %}> Digital Wallet
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="service" value="BusinessBanking" {% if 'BusinessBanking' in selected_services %}checked{% endif %}> Business Banking
+            </label>
+        </div>
+
+        <div class="navigation-buttons">
+            <a href="{{ back_url }}" class="btn-back">← Back</a>
+            <button type="submit" class="btn-next">Next: Preference →</button>
+        </div>
+    </form>
+    <!-- <input type="checkbox" name="service" value="Loans" {% if 'Loans' in selected_services %}checked{% endif %}>
+<input type="checkbox" name="service" value="Investments" {% if 'Investments' in selected_services %}checked{% endif %}> -->
+
+{% endblock %}

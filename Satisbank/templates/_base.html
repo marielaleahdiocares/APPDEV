@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank - Account Setup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="card-container">
+        <div class="card-header">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="SatisBank Logo" class="logo">
+            <h2>Create Your Account</h2>
+            <p>Join SatisBank to make smarter banking decisions.</p>
+        </div>
+
+        {% if step %}
+        <div class="progress-bar-container">
+            <div class="step {{ 'completed' if step > 1 else 'current' if step == 1 else '' }}">
+                <span class="circle">{{ '✓' if step > 1 else '1' }}</span>
+                </div>
+            <div class="step {{ 'completed' if step > 2 else 'current' if step == 2 else '' }}">
+                <span class="circle">{{ '✓' if step > 2 else '2' }}</span>
+                </div>
+            <div class="step {{ 'current' if step == 3 else '' }}">
+                <span class="circle">3</span>
+                </div>
+        </div>
+        {% endif %}
+
+        <div class="card-content">
+            {% block content %}{% endblock %}
+        </div>
+        
+        <div class="card-footer">
+            Already have an account? <a href="{{ url_for('login') }}">Login Here</a>
+        </div>
+    </div>
+</body>
+</html>

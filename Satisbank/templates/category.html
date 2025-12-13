@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="back" href="{{ url_for('help_center') }}">&larr; Back to Help Center</a>
+
+<div class="category-header">
+  <div class="cat-ico"><i class="fa {{ category.icon }}"></i></div>
+  <div>
+    <h2>{{ category.title }}</h2>
+    <p class="subtle">Frequently asked questions in {{ category.title }}</p>
+  </div>
+</div>
+
+<div class="cards">
+  {% for it in items %}
+    <div class="faq-card">
+      <h4>{{ it.question }}</h4>
+      <p>{{ it.answer }}</p>
+    </div>
+  {% else %}
+    <p>No FAQs yet for this category.</p>
+  {% endfor %}
+</div>
+{% endblock %}

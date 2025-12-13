@@ -1,0 +1,51 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h3>Step 3: Banking Preferences</h3>
+    <div class="sub-step-indicator">
+        <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <h4>Which bank(s) do you currently use?</h4>
+    <form method="POST" action="{{ url_for('survey_bank') }}">
+        <div class="checkbox-grid">
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="BDO" {% if 'BDO' in selected_banks %}checked{% endif %}> BDO Unibank
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="BPI" {% if 'BPI' in selected_banks %}checked{% endif %}> BPI
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="Metrobank" {% if 'Metrobank' in selected_banks %}checked{% endif %}> Metrobank
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="SecurityBank" {% if 'SecurityBank' in selected_banks %}checked{% endif %}> Security Bank
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="UnionBank" {% if 'UnionBank' in selected_banks %}checked{% endif %}> UnionBank
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="LandBank" {% if 'LandBank' in selected_banks %}checked{% endif %}> Land Bank
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="PNB" {% if 'PNB' in selected_banks %}checked{% endif %}> PNB
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="RCBC" {% if 'RCBC' in selected_banks %}checked{% endif %}> RCBC
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="EastWestBank" {% if 'EastWestBank' in selected_banks %}checked{% endif %}> EastWest Bank
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" name="bank" value="Chinabank" {% if 'Chinabank' in selected_banks %}checked{% endif %}> Chinabank
+            </label>
+        </div>
+        <div class="navigation-buttons">
+            <a href="{{ url_for('user_type') }}" class="btn-back">← Back</a>
+            <button type="submit" class="btn-next">Next: Services →</button>
+        </div>
+
+        <!-- <input type="checkbox" name="bank" value="BankA" {% if 'BankA' in selected_banks %}checked{% endif %}>
+        <input type="checkbox" name="bank" value="BankB" {% if 'BankB' in selected_banks %}checked{% endif %}> -->
+
+    </form>
+{% endblock %}

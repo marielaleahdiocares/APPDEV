@@ -1,0 +1,33 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h3>Step 3: Banking Preferences</h3>
+    <div class="sub-step-indicator">
+        <span class="dot completed"></span><span class="dot completed"></span><span class="dot active"></span>
+    </div>
+    <h4>How do you prefer to bank?</h4>
+    <form method="POST" action="{{ url_for('survey_preference') }}">
+        <div class="radio-card-group horizontal">
+            
+            <label class="radio-card">
+                <input type="radio" name="preference" value="mobile" {% if selected_pref == 'mobile' %}checked{% endif %}>
+                <span>Primarily Mobile/Online Banking</span>
+            </label>
+
+            <label class="radio-card">
+                <input type="radio" name="preference" value="Mixed" {% if selected_pref == 'Mixed' %}checked{% endif %}>
+                <span>Mix of Digital and In-Person</span>
+            </label>
+            
+            <label class="radio-card">
+                <input type="radio" name="preference" value="in-person" {% if selected_pref == 'in-person' %}checked{% endif %}>
+                <span>Primarily In-Person at Branches</span>
+            </label>
+            
+        </div>
+        <div class="navigation-buttons">
+            <a href="{{ url_for('survey_interest') }}" class="btn-back">← Back</a>
+            <button type="submit" class="btn-finish">Finish & Create Account ✓</button>
+        </div>
+    </form>
+{% endblock %}

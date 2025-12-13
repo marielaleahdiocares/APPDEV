@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="card-container login-card">
+        <div class="card-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="SatisBank Logo" class="logo">
+            <h2>Welcome Back</h2>
+            <p>Login to access your SatisBank dashboard.</p>
+
+            <!-- Flash messages (success / error) -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <div class="flash-messages">
+                  {% for category, message in messages %}
+                    <div class="flash {{ category }}">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="card-content">
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <a href="#" class="forgot-password">Forgot password?</a>
+                
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+        </div>
+        <div class="card-footer">
+            Don't have an account? <a href="{{ url_for('create_account') }}">Register Now</a>
+        </div>
+    </div>
+</body>
+</html>

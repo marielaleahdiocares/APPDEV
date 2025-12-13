@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank - The Future of Banking</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
+
+</head>
+<body>
+
+    <!-- Navigation (Floating) -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+              <img class="logo-img"  src="{{ url_for('static', filename='images/logo.png') }}" alt="SatisBank Logo">  <p> <span class="logo-icon">atisbank</span></p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Insights</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="{{ url_for('create_account') }}" class="btn btn-outline">Sign Up</a>
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Log In</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>The <span class="text-blue">Future of Banking</span> Starts With You</h1>
+                <p>You deserve more than just a bank — you deserve the right one. SatisBank helps you explore real customer experiences, service ratings, and trust levels, guiding you toward smarter, more confident financial choices.</p>
+                <div class="hero-btns">
+                    <a href="{{ url_for('guest_dashboard') }}" class="btn btn-outline">Explore as Guest</a>
+                    <a href="{{ url_for('create_account') }}" class="btn btn-primary">Register Now</a>
+                </div>
+            </div>
+            <div class="hero-graphic">
+                <div class="blue-circle-bg"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="pill">Our Feature Section</span>
+                <h2>Smart tools. Smart finances.</h2>
+                <p>Our platform provides comprehensive banking metrics and personalized recommendations to help you make the best financial decisions.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-chart-simple"></i></div>
+                    <h3>Dashboard</h3>
+                    <p>View a quick summary of how every bank is performing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-code-compare"></i></div>
+                    <h3>Bank Comparison Tool</h3>
+                    <p>Compare banks side-by-side by trust, service quality, and performance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <h3>Personalized Recommendation</h3>
+                    <p>Discover the best banks tailored to your specific needs and preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-regular fa-bookmark"></i></div>
+                    <h3>Bookmark</h3>
+                    <p>Save your top choices to a personal watchlist for quick and easy access.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Visual Analytics</h3>
+                    <p>Visualize customer satisfaction and service trends with interactive data charts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-building-columns"></i></div>
+                    <h3>Bank Profile</h3>
+                    <p>Explore detailed service ratings and real customer feedback for every bank.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container about-container">
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='images/image44.png') }}" alt="Dashboard Preview">
+            </div>
+            <div class="about-content">
+                <span class="pill">About Satisbank</span>
+                <h2>Empowering Your Banking Decisions</h2>
+                <p>SatisBank is a web-based decision support system that evaluates customer satisfaction and service preferences among PH banks. We process data from surveys and reviews to present comprehensive dashboards showing ratings on service quality, digital performance, and customer loyalty.</p>
+                <ul class="check-list">
+                    <li><i class="fa-regular fa-circle-check"></i> Real customer satisfaction data from Philippine banks</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Comprehensive service quality ratings and analysis</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Digital Banking Performance Metrics</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Customer loyalty and trust scores</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Data-driven insights from surveys and reviews</li>
+                    <p>The platform enables users to compare banks, explore financial services, and access tailored recommendations, promoting transparency and informed choices in banking.</p>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="insights">
+        <div class="container">
+            <div class="section-header white-text">
+                <h2>Insights That Matter</h2>
+                <p>Access comprehensive data and analytics to make informed banking decisions</p>
+            </div>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <h3>10 Philippine Banks Analyzed</h3>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon"><i class="fa-solid fa-star"></i></div>
+                    <h3>5 Star Rating System</h3>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon"><i class="fa-solid fa-clock"></i></div>
+                    <h3>Real-Time Data Updates</h3>
+                </div>
+            </div>
+            <div class="insight-card-center">
+                <div class="insight-card">
+                    <div class="insight-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>1000+ Customer Reviews</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Meet Our Team -->
+    <section class="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our Team</h2>
+                <p>The dedicated researchers and developers contributing to build a decision support system that transforms complex customer feedback into clear, comparative insights. Fostering trust and accountability in the Philippine banking sector.</p>
+            </div>
+            <div class="team-grid">
+                <!-- Member 1 -->
+                <div class="team-card">
+                    <div class="avatar-circle">
+                        <img src="https://placehold.co/100x100?text=PG" alt="Princethom Guyo">
+                    </div>
+                    <h4>Priencethom Guyo</h4>
+                    <span class="role pill">UI Designer</span>
+                </div>
+                <!-- Member 2 -->
+                <div class="team-card">
+                    <div class="avatar-circle">
+                        <img src="https://placehold.co/100x100?text=EJ" alt="Kurt Russel Jimenez">
+                    </div>
+                    <h4>Kurt Russel Jimenez</h4>
+                    <span class="role pill">Senior Developer</span>
+                </div>
+                <!-- Member 3 -->
+                <div class="team-card">
+                    <div class="avatar-circle">
+                        <img src="https://placehold.co/100x100?text=MD" alt="Mariel Aleah Diocares">
+                    </div>
+                    <h4>Mariel Aleah Diocares</h4>
+                    <span class="role pill">Researcher/Data Analyst</span>
+                </div>
+                <!-- Member 4 -->
+                <div class="team-card">
+                    <div class="avatar-circle">
+                        <img src="https://placehold.co/100x100?text=PA" alt="Princess Marcelle Ambrocio">
+                    </div>
+                    <h4>Princess Marcelle Ambrocio</h4>
+                    <span class="role pill">UI/UX Designer</span>
+                </div>
+                <!-- Member 5 -->
+                <div class="team-card">
+                    <div class="avatar-circle">
+                        <img src="https://placehold.co/100x100?text=KC" alt="King Jamcent Casupang">
+                    </div>
+                    <h4>King Jamcent Casupang</h4>
+                    <span class="role pill">Junior Developer</span>
+                </div>
+                <!-- Member 6 -->
+                <div class="team-card">
+                    <div class="avatar-circle">
+                        <img src="https://placehold.co/100x100?text=AD" alt="Ashley Gapasin">
+                    </div>
+                    <h4>Ashley Gapasin</h4>
+                    <span class="role pill">Project Manager</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="cta-bottom">
+        <div class="container">
+            <h2>Ready to Make Smarter Banking Choices?</h2>
+            <p>Join SatisBank today and discover which Philippine bank is the perfect fit for your financial needs based on real customer experiences and data-driven insights.</p>
+            <div class="cta-btns">
+                <a href="#" class="btn btn-primary">Explore as Guest</a>
+                <a href="#" class="btn btn-outline">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: FAQ -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Curious about your bank? Find answers to the most common questions from our community of Filipino banking clients and see how SatisBank empowers your financial decisions.</p>
+            </div>
+            
+            <div class="faq-container">
+    <div class="faq-item active"> <div class="faq-question">
+            <span>What is the source of the customer satisfaction data?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+                <div class="faq-answer">
+                    <p>SatisBank gathers data from a combination of public surveys, sentiment analysis of social media and news feeds, and proprietary user-submitted ratings. All data is aggregated and anonymized to calculate the **SatisScore** and other core metrics.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How often are the bank comparison data updated?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We pride ourselves on providing a data where possible. Interest rates and fee schedules are checked and updated semiannually. Customer satisfaction scores are updated semiannually. Major product features and regulatory changes are updated within a week of official announcement.</p>
+                </div>
+            </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I compare more than two banks at once?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our advanced comparison tool allows you to select as many as you want.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is the difference between an Existing Bank Client and a Prospective Client Profile?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The **Existing Client Profile** uses comparison metrics relevant to current account holders (e.g., overdraft fees, loyalty programs, online banking features). The **Prospective Client Profile** focuses on metrics relevant to switching or opening a new account (e.g., introductory offers, sign-up bonuses, ease of application).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo white-logo">
+                    <p> <img src="{{ url_for('static', filename='logo.png') }}" alt="SatisBank Logo"><span class="logo-icon">atisbank</span></p>
+                </div>
+                <p>Making banking decisions easier through transparency and innovative insights.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Insights</a></li>
+                </ul>
+            </div>
+            <div class="footer-support">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms and Service</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const questions = document.querySelectorAll('.faq-question');
+
+    questions.forEach(question => {
+        question.addEventListener('click', () => {
+            // Toggles the 'active' class on the parent element
+            question.closest('.faq-item').classList.toggle('active');
+        });
+    });
+});
+</script>
+
+</body>
+</html>

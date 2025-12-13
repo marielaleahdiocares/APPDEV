@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SatisBank Help Center</title>
+
+  <!-- Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='help_center.css') }}">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+        <img src="{{ url_for('static', filename='images/logo_text.png') }}" class="text-logo">
+      </div>
+
+      <h4>Menu</h4>
+      <nav class="sidebar-menu">
+        <a href="{{ url_for('home') }}">Dashboard</a>
+        <a href="{{ url_for('comparison') }}">Comparison</a>
+        <a href="{{ url_for('reco') }}">Recommendation</a>
+        <a href="{{ url_for('analysis') }}">Analytics</a>
+        <a href="{{ url_for('bprofile') }}">Bank Profile</a>
+      </nav>
+
+      <h4>General</h4>
+      <nav class="sidebar-menu">
+        <a href="{{ url_for('profile') }}">Profile</a>
+        <a href="{{ url_for('logout') }}">Log out</a>
+      </nav>
+
+      <div class="help-card">
+        <h5>Help Center</h5>
+        <p style="font-size: 0.8rem; color: #6c757d;">Having trouble? Check out our FAQ or chat with support.</p>
+        <button>Go to Help Center</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

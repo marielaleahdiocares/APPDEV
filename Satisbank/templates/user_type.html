@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h3>Step 2: Tell Us About Yourself</h3>
+    <p>This helps us personalize your recommendations.</p>
+    <form method="POST" action="{{ url_for('user_type') }}">
+        <div class="radio-card-group">
+            <label class="radio-card">
+                <input type="radio" name="user_type" value="existing" {% if selected_type == 'existing' %}checked{% endif %} required>
+                <div>
+                    <h4>Existing Bank Client</h4>
+                    <p>You already have one or more bank accounts.</p>
+                </div>
+            </label>
+            <label class="radio-card">
+                <input type="radio" name="user_type" value="prospective" {% if selected_type == 'prospective' %}checked{% endif %}>
+                <div>
+                    <h4>Prospective Client</h4>
+                    <p>You are looking to open your first bank account.</p>
+                </div>
+            </label>
+        </div>
+        <div class="navigation-buttons">
+            <a href="{{ url_for('create_account') }}" class="btn-back">← Back</a>
+            <button type="submit" class="btn-next">Next: Preferences →</button>
+        </div>
+    </form>
+{% endblock %}

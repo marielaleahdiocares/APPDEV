@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank - Banking References</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='references.css') }}">
+</head>
+<body>
+
+<div class="app-container">
+     <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"> <img src="{{ url_for('static', filename='images/logo_text.png') }}" class="text-logo" >
+
+        </div>  
+
+        <h4>Menu</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('home') }}">Dashboard </a>
+            <a href="{{ url_for('comparison') }}">Comparison</a>
+            <a href="{{ url_for('reco') }}">Recommendation</a>
+            <a href="{{ url_for('analysis') }}" >Analytics</a>
+            <a href="{{ url_for('bprofile') }}">Bank Profile</a>
+        </nav>
+
+        <h4>General</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('profile') }}" class="active">Profile</a>
+            <a href="{{ url_for('logout') }}">Log out</a>
+        </nav>
+        
+        <div class="help-card">
+            <h5>Help Center</h5>
+            <p style="font-size: 0.8rem; color: #6c757d;">Having trouble? Check out our FAQ or chat with support.</p>
+            <a href="{{ url_for('help_center') }}"><button>Go to Help Center</button></a>
+        </div>
+    </aside>
+
+   
+    <main class="main-content">
+        
+        <header class="page-header">
+            <h2>Profile</h2>
+        </header>
+
+        <div class="content-card">
+            
+                <div class="tabs">
+                    <a class="tab-button" href="{{ url_for('profile') }}">Account Details</a>
+                    <a class="tab-button active" href="{{ url_for('references') }}">Banking References</a>
+                    <a class="tab-button" href="#">Saved Banks</a>
+                </div>
+
+        
+            <div class="form-container">
+                <h2>Update Bank References</h2>
+
+                <form>
+                    <div class="form-group">
+                        <label class="section-label">Client Type</label>
+                        <div class="radio-group-horizontal">
+                            
+                            <label class="custom-radio-option">
+                                <input type="radio" name="client_type" value="existing" checked>
+                                <span class="radio-circle"></span>
+                                <div class="option-box">
+                                    <i class="fa-solid fa-user-check text-blue"></i> Existing Bank Client
+                                </div>
+                            </label>
+
+                            <label class="custom-radio-option">
+                                <input type="radio" name="client_type" value="prospective">
+                                <span class="radio-circle"></span>
+                                <div class="option-box">
+                                    <i class="fa-solid fa-user-plus text-green"></i> Prospective Client
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="form-group">
+                        <label class="section-label">Bank(s) you currently used</label>
+                        <div class="checkbox-grid">
+                            <div class="grid-col">
+                                <label class="checkbox-item"><input type="checkbox"> Banco de Oro Unibank, Inc.</label>
+                                <label class="checkbox-item"><input type="checkbox"> Metropolitan Bank & Trust Company</label>
+                                <label class="checkbox-item"><input type="checkbox"> East West Banking Corporation</label>
+                                <label class="checkbox-item"><input type="checkbox"> Philippine National Bank</label>
+                                <label class="checkbox-item"><input type="checkbox"> Bank of Commerce</label>
+                            </div>
+                            <div class="grid-col">
+                                <label class="checkbox-item"><input type="checkbox"> Bank of the Philippines Island</label>
+                                <label class="checkbox-item"><input type="checkbox"> Security Bank Corporation</label>
+                                <label class="checkbox-item"><input type="checkbox"> Land Bank of the Philippines</label>
+                                <label class="checkbox-item"><input type="checkbox"> Rizal Commercial Banking Corporation</label>
+                                <label class="checkbox-item"><input type="checkbox"> China Banking Corporation</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-label">Bank Services</label>
+                        <div class="checkbox-grid">
+                            <div class="grid-col">
+                                <label class="checkbox-item"><input type="checkbox"> Savings Account</label>
+                                <label class="checkbox-item"><input type="checkbox"> Credit Card</label>
+                                <label class="checkbox-item"><input type="checkbox"> Investment Products</label>
+                                <label class="checkbox-item"><input type="checkbox"> Business Banking</label>
+                                <label class="checkbox-item"><input type="checkbox"> Remmitance Services</label>
+                            </div>
+                            <div class="grid-col">
+                                <label class="checkbox-item"><input type="checkbox"> Checking Account</label>
+                                <label class="checkbox-item"><input type="checkbox"> Loans</label>
+                                <label class="checkbox-item"><input type="checkbox"> Insurance</label>
+                                <label class="checkbox-item"><input type="checkbox"> Digital Wallet</label>
+                                <label class="checkbox-item"><input type="checkbox"> Others:</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="section-label">Preferred to Bank</label>
+                        <div class="radio-group-pref">
+                            
+                            <label class="custom-radio-option">
+                                <input type="radio" name="preference" value="mobile">
+                                <span class="radio-circle"></span>
+                                <div class="option-box text-only">Primarily Mobile/Online Banking</div>
+                            </label>
+
+                            <label class="custom-radio-option">
+                                <input type="radio" name="preference" value="mix">
+                                <span class="radio-circle"></span>
+                                <div class="option-box text-only">Mix of Digital and In-Person</div>
+                            </label>
+
+                            <label class="custom-radio-option">
+                                <input type="radio" name="preference" value="branch">
+                                <span class="radio-circle"></span>
+                                <div class="option-box text-only">Primarily In-Person at Branches</div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn-save">Save Changes</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

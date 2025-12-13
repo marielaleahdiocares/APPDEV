@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatisBank - Guest Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='guest_dashboard.css') }}">
+</head>
+<body>
+
+<div class="app-container">
+    
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"> <img src="{{ url_for('static', filename='images/logo_text.png') }}" class="text-logo" >
+
+        </div>
+
+        <h4>Menu</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('home') }}" class="active">Dashboard </a>
+            <a href="{{ url_for('comparison') }}">Comparison</a>
+            <a href="{{ url_for('reco') }}">Recommendation</a>
+            <a href="{{ url_for('analysis') }}" >Analytics</a>
+            <a href="{{ url_for('bprofile') }}">Bank Profile</a>
+        </nav>
+
+        <h4>General</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Log out</a>
+        </nav>
+        
+        <div class="help-card">
+            <h5>Help Center</h5>
+            <p style="font-size: 0.8rem; color: #6c757d;">Having trouble? Check out our FAQ or chat with support.</p>
+            <a href="{{ url_for('help_center') }}"><button>Go to Help Center</button></a>
+        </div>
+    </aside>
+
+
+    <main class="main-content">
+        
+        <header class="top-header">
+            <div></div>
+            <div class="user-actions">
+                <div class="icon-btn"><i class="fa-regular fa-bell"></i></div>
+                <div class="user-profile guest-profile">
+                    <div class="avatar"><i class="fa-regular fa-user"></i></div>
+                    <span>Guest</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="card stat-card active-stat">
+                <p class="stat-label text-blue">Average Satisfaction</p>
+                <div class="stat-flex">
+                    <div class="icon-sq blue-bg"><i class="fa-solid fa-star"></i></div>
+                    <div><h3>8.3/10</h3><small>Across your banks</small></div>
+                </div>
+            </div>
+            <div class="card stat-card active-stat">
+                <p class="stat-label text-green">Banks Tracked</p>
+                <div class="stat-flex">
+                    <div class="icon-sq green-bg"><i class="fa-solid fa-chart-line"></i></div>
+                    <div><h3>10</h3><small>(Philippine Banks)</small></div>
+                </div>
+            </div>
+            <div class="card stat-card locked-stat">
+                <div class="locked-overlay">
+                    <i class="fa-solid fa-lock"></i> Locked
+                    <span class="pill-orange-sm">Registered Feature</span>
+                </div>
+                <p class="stat-label text-orange blur-text">Bookmarked</p>
+                <div class="stat-flex blur-content">
+                    <div class="icon-sq orange-bg"><i class="fa-regular fa-bookmark"></i></div>
+                    <div><h3>--</h3><small>Saved banks</small></div>
+                </div>
+            </div>
+            <div class="card stat-card locked-stat">
+                 <div class="locked-overlay">
+                    <i class="fa-solid fa-lock"></i> Locked
+                    <span class="pill-purple-sm">Registered Feature</span>
+                </div>
+                <p class="stat-label text-purple blur-text">User Type</p>
+                <div class="stat-flex blur-content">
+                    <div class="icon-sq purple-bg"><i class="fa-regular fa-user"></i></div>
+                    <div><h3>Client</h3><small>Profile</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-split-grid">
+            
+            <div class="card list-card">
+                <div class="card-header">
+                    <h3>Top Rated Banks <span class="pill-outline">Limited Preview</span></h3>
+                    <p class="sub-text">Top 4 banks by customer satisfaction (Register to see all)</p>
+                </div>
+                
+                <div class="bank-list">
+                    <div class="bank-item">
+                        <div class="rank-circle">1</div>
+                        <div class="bank-info">
+                            <h4>BPI</h4>
+                            <p>Bank of the Philippine Islands</p>
+                            <div class="tags"><span>Mobile banking app</span><span>Wealth management</span></div>
+                        </div>
+                        <span class="score-green">8.7/10</span>
+                    </div>
+                     <div class="bank-item">
+                        <div class="rank-circle">2</div>
+                        <div class="bank-info">
+                            <h4>BDO</h4>
+                            <p>Banco de Oro Unibank, Inc.</p>
+                            <div class="tags"><span>Extensive branch</span><span>Digital banking</span></div>
+                        </div>
+                        <span class="score-green">8.5/10</span>
+                    </div>
+                     <div class="bank-item">
+                        <div class="rank-circle">3</div>
+                        <div class="bank-info">
+                            <h4>Security Bank</h4>
+                            <p>Security Bank Corporation</p>
+                            <div class="tags"><span>High interest savings</span><span>Personal loans</span></div>
+                        </div>
+                        <span class="score-green">8.4/10</span>
+                    </div>
+                     <div class="bank-item">
+                        <div class="rank-circle">4</div>
+                        <div class="bank-info">
+                            <h4>Metrobank</h4>
+                            <p>Metropolitan Bank & Trust Company</p>
+                            <div class="tags"><span>International presence</span><span>Trade Finance</span></div>
+                        </div>
+                        <span class="score-green">8.3/10</span>
+                    </div>
+                </div>
+                
+                <button class="btn-lock-main"><i class="fa-solid fa-lock"></i> Register to View All Banks</button>
+            </div>
+
+            <div class="card overview-card">
+                <div class="card-header">
+                    <h3>Satisfaction Overview</h3>
+                    <p class="sub-text">Complete overview of customer satisfaction scores</p>
+                </div>
+                
+                <div class="sat-list">
+                    <div class="sat-row">
+                        <span class="sq-num yellow-sq">1</span>
+                        <span class="sat-name">BPI (Bank of the Philippine Islands)</span>
+                        <div class="progress-container"><div class="progress-bar" style="width: 87%;"></div></div>
+                        <span class="sat-score">8.7/10</span>
+                    </div>
+                    <div class="sat-row">
+                        <span class="sq-num blue-sq">2</span>
+                        <span class="sat-name">BDO (Banco de Oro Unibank, Inc.)</span>
+                        <div class="progress-container"><div class="progress-bar" style="width: 85%;"></div></div>
+                        <span class="sat-score">8.5/10</span>
+                    </div>
+                    <div class="sat-row">
+                        <span class="sq-num blue-sq">3</span>
+                        <span class="sat-name">Security Bank Corporation</span>
+                        <div class="progress-container"><div class="progress-bar" style="width: 84%;"></div></div>
+                        <span class="sat-score">8.4/10</span>
+                    </div>
+                </div>
+
+                <div class="register-cta-box">
+                     <button class="btn-lock-main"><i class="fa-solid fa-lock"></i> Register to Compare Banks</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="offers-grid">
+            <div class="card offer-card green-theme">
+                <div class="offer-header">
+                    <i class="fa-solid fa-piggy-bank"></i> Best Savings Rate
+                </div>
+                <div class="offer-body">
+                    <p class="sub-text">Top Performer</p>
+                    <h3>Security Bank</h3>
+                    <div class="big-rate text-green">0.32%</div>
+                    <p class="sub-text">Security Bank Corporation</p>
+                </div>
+                <button class="btn-lock-offer green-lock"><i class="fa-solid fa-lock"></i> View All Rates</button>
+            </div>
+
+            <div class="card offer-card blue-theme">
+                <div class="offer-header">
+                    <i class="fa-solid fa-money-bill-trend-up"></i> Lowest Loan Rate
+                </div>
+                <div class="offer-body">
+                    <p class="sub-text">Best Deal</p>
+                    <h3>LandBank</h3>
+                    <div class="big-rate text-blue">10.5%</div>
+                    <p class="sub-text">Land Bank of the Philippines</p>
+                </div>
+                <button class="btn-lock-offer blue-lock"><i class="fa-solid fa-lock"></i> View All Rates</button>
+            </div>
+        </div>
+
+        <div class="bottom-grid">
+            
+            <div class="card info-card">
+                <h3>Registered User Access</h3>
+                <p class="sub-text">Register to unlock all features</p>
+                
+                <div class="locked-features-row">
+                    <div class="feature-box">
+                        <span class="pill-locked">Locked</span>
+                        <i class="fa-solid fa-lock big-lock"></i>
+                        <span>Compare Banks</span>
+                    </div>
+                    <div class="feature-box">
+                        <span class="pill-locked">Locked</span>
+                        <i class="fa-solid fa-lock big-lock"></i>
+                        <span>Bank Analytics</span>
+                    </div>
+                    <div class="feature-box">
+                        <span class="pill-locked">Locked</span>
+                        <i class="fa-solid fa-lock big-lock"></i>
+                        <span>Bookmarked</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card warning-card">
+                <div class="warning-header">
+                    <i class="fa-solid fa-circle-exclamation text-orange"></i>
+                    <h3>Limited Guest Access</h3>
+                </div>
+                <p class="sub-text">As a guest, you can only view top 3 banks in rankings and basic information. Register for free to unlock:</p>
+                
+                <div class="benefits-list">
+                    <ul>
+                        <li><i class="fa-solid fa-angle-right text-green"></i> Full bank directory (10+ banks)</li>
+                        <li><i class="fa-solid fa-angle-right text-green"></i> Personalized recommendations</li>
+                        <li><i class="fa-solid fa-angle-right text-green"></i> Advanced filtering tools</li>
+                    </ul>
+                    <ul>
+                        <li><i class="fa-solid fa-angle-right text-green"></i> Side-by-side comparisons</li>
+                        <li><i class="fa-solid fa-angle-right text-green"></i> Bookmark favorite banks</li>
+                        <li><i class="fa-solid fa-angle-right text-green"></i> Detailed analytics</li>
+                    </ul>
+                </div>
+
+                <button class="btn-create-account">Create Free Account Now</button>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
