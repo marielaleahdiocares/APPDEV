@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='comparison.css') }}">
+        
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"> <img src="{{ url_for('static', filename='images/logo_text.png') }}" class="text-logo" >
+
+        </div>
+
+        <h4>Menu</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('home') }}">Dashboard </a>
+            <a href="{{ url_for('comparison') }}" class="active">Comparison</a>
+            <a href="{{ url_for('reco') }}">Recommendation</a>
+            <a href="{{ url_for('analysis') }}" >Analytics</a>
+            <a href="{{ url_for('bprofile') }}">Bank Profile</a>
+        </nav>
+
+        <h4>General</h4>
+        <nav class="sidebar-menu">
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Log out</a>
+        </nav>
+        
+        <div class="help-card">
+            <h5>Help Center</h5>
+            <p style="font-size: 0.8rem; color: #6c757d;">Having trouble? Check out our FAQ or chat with support.</p>
+            <a href="{{ url_for('help_center') }}"><button>Go to Help Center</button></a>
+        </div>
+    </aside>
+
+
+</body>
+</html>
