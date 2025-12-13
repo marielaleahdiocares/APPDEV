@@ -1,0 +1,70 @@
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            font-family: "Poppins", sans-serif;
+            overflow: hidden;
+        }
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0;        /* no spacing, so text emerges naturally */
+            position: relative;
+        }
+
+        /* LOGO (Main Icon) */
+        .logo {
+            width: 100px;
+            opacity: 0;
+            animation: fadeZoom 1.2s ease-out forwards;
+            z-index: 2;     /* stays in front */
+        }
+
+        /* TEXT that emerges */
+        .text-logo {
+            width: 190px;
+            opacity: 0;
+            
+            /* START inside the logo */
+            transform: translateX(-40px);
+
+            /* Text emerges FROM the logo */
+            animation: revealOut 1s ease-out forwards;
+            animation-delay: 1.2s; /* Starts after logo appears */
+            
+            z-index: 1;     /* goes behind the icon initially */
+        }
+
+        @keyframes fadeZoom {
+            from { opacity: 0; transform: scale(0.7); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* Text emerges from behind the logo */
+        @keyframes revealOut {
+            0% {
+                opacity: 0;
+                transform: translateX(-40px); /* hidden inside logo */
+            }
+            40% {
+                opacity: 1;
+                transform: translateX(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0); /* fully out beside logo */
+            }
+        }
+
+        /* Fade-out transition */
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; }
+        }

@@ -1,0 +1,341 @@
+/* --- Variables & Reset --- */
+:root {
+    --primary-blue: #1c4ed8;
+    --dark-blue: #1e3a8a;
+    --light-blue-bg: #eff6ff;
+    --text-dark: #1f2937;
+    --text-gray: #6b7280;
+    --white: #ffffff;
+    --footer-bg: #0f172a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--white);
+    overflow-x: hidden;
+    /* *** UPDATED: Increased padding to account for the space above/below the floating card ***
+    */
+    padding-top: 100px; 
+}
+
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Buttons & Utilities --- */
+.btn {
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: 1px solid var(--primary-blue);
+}
+.btn-primary:hover { background-color: var(--dark-blue); }
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: var(--text-dark);
+}
+.btn-outline:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
+
+.text-blue { color: var(--primary-blue); }
+.pill {
+    background-color: #dbeafe;
+    color: var(--primary-blue);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+/* *** UPDATED: Floating Navbar (Outer Fixed Wrapper) ***
+*/
+.navbar {
+    padding: 0; /* Remove padding here, it moves to the inner container */
+    background: transparent; /* Make the fixed bar transparent */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: none; /* Remove shadow from the outer wrapper */
+}
+
+/* *** UPDATED: The Floating CARD Element (Inner Container) ***
+*/
+.nav-container {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* These properties create the floating card look */
+    width: 90%; /* Makes the card narrower than the screen */
+    max-width: 1900px;
+    margin: 20px auto 0 auto; /* Centers the card and adds space above it */
+    padding: 15px 30px; /* Padding inside the card */
+
+    /* Card styling */
+    background: var(--white);
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* The lift/shadow effect */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+    display: flex;
+    align-items: center;
+}
+.logo-icon {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    margin-right: 2px;
+}
+
+.nav-links { display: flex; gap: 30px; }
+.nav-links a { font-weight: 500; font-size: 0.95rem; color: var(--text-dark); }
+.nav-links a:hover { color: var(--primary-blue); }
+
+.nav-buttons { display: flex; gap: 15px; }
+
+/* --- Hero Section --- */
+.hero {
+    position: relative;
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-content h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.hero-content p { color: var(--text-gray); margin-bottom: 30px; font-size: 1rem; max-width: 90%; }
+.hero-btns { display: flex; gap: 15px; }
+
+.hero-graphic { position: relative; height: 100%; }
+.blue-circle-bg {
+    position:absolute;
+    top: -100px;
+    right: -500px;
+    width: 600px;
+    height: 600px;
+    background-color: var(--primary-blue);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* --- Features Section --- */
+.features { padding: 80px 0; background-color: #fcfcfc; }
+.section-header { text-align: center; margin-bottom: 50px; }
+.section-header h2 { font-size: 2.2rem; margin: 15px 0; color: var(--text-dark); }
+.section-header p { color: var(--text-gray); max-width: 700px; margin: 0 auto; }
+
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+.feature-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+.feature-card:hover { transform: translateY(-5px); }
+
+.icon-box {
+    width: 50px; height: 50px;
+    background-color: var(--light-blue-bg);
+    color: var(--primary-blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+.feature-card h3 { margin-bottom: 10px; font-size: 1.1rem; }
+.feature-card p { font-size: 0.9rem; color: var(--text-gray); }
+
+/* --- About Section --- */
+.about { padding: 80px 0; }
+.about-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.about-image img { width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.check-list { margin-top: 20px; }
+.check-list li { margin-bottom: 15px; display: flex; align-items: center; color: var(--text-gray); font-size: 0.95rem; }
+.check-list i { color: var(--primary-blue); margin-right: 12px; font-size: 1.1rem; }
+
+/* --- Insights Section --- */
+.insights { background-color: #1e40af; padding: 80px 0; color: var(--white); }
+.section-header.white-text h2, .section-header.white-text p { color: var(--white); }
+.insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+.insight-card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px; border-radius: 8px; text-align: center; backdrop-filter: blur(5px);
+}
+.insight-icon {
+    width: 60px; height: 60px; margin: 0 auto 15px; background: var(--white); color: var(--primary-blue);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+}
+.insight-card-center { display: flex; justify-content: center; margin-top: 20px; }
+.insight-card-center .insight-card { width: 350px; }
+
+/* --- NEW: Team Section --- */
+.team { padding: 80px 0; background: #fff; }
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+}
+.team-card {
+    text-align: center;
+    padding: 20px 10px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+.team-card:hover { border-color: var(--primary-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.avatar-circle {
+    width: 80px; height: 80px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+.avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
+.team-card h4 { font-size: 0.9rem; margin-bottom: 8px; font-weight: 600; }
+.team-card .role { font-size: 0.65rem; padding: 4px 10px; margin-bottom: 0; }
+
+/* --- CTA Bottom --- */
+.cta-bottom { padding: 100px 0; text-align: center; background: #1c4ed8; color: white; }
+.cta-bottom h2 { font-size: 2rem; margin-bottom: 15px; }
+.cta-bottom p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 30px; }
+.cta-btns { display: flex; justify-content: center; gap: 20px; }
+.cta-btns .btn-primary { background: white; color: var(--primary-blue); border: none; }
+.cta-btns .btn-outline { border-color: white; color: white; }
+.cta-btns .btn-outline:hover { background: white; color: var(--primary-blue); }
+
+/* --- NEW: FAQ Section --- */
+/* --- NEW: Icon Rotation Transition --- */
+
+/* This is the full-width section wrapper */
+.faq { 
+    padding: 80px 0; 
+    background: #fcfcfc; 
+}
+
+/* This is your inner container, correctly centered and width-limited */
+.faq-container { 
+    max-width: 800px; /* Limits the container width */
+    margin: 0 auto; /* *** This centers the container horizontally *** */
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+}
+.faq-question i {
+    color: var(--primary-blue);
+    /* Keep the original color and add a smooth transition for rotation */
+    transition: transform 0.3s ease; 
+}
+
+/* Rotate the icon 180 degrees when the parent .faq-item has the 'active' class */
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+/* --- NEW: FAQ Answer Panel Styling --- */
+.faq-answer {
+    /* Initially hide the answer panel */
+    max-height: 0; 
+    overflow: hidden;
+    padding: 0 20px;
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    /* Transition applied to max-height and padding for a smooth open/close animation */
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; 
+}
+
+/* Style for the answer text content */
+.faq-answer p {
+    padding-bottom: 20px; /* Separates the text from the bottom of the item */
+    margin-top: 0; /* Ensures clean spacing */
+}
+
+/* Apply these styles when the item is active (open) */
+.faq-item.active .faq-answer {
+    /* Set a height that is guaranteed to be taller than the answer content */
+    max-height: 300px; 
+    padding-top: 10px; 
+    padding-bottom: 20px;
+}
+
+/* --- Footer --- */
+footer { background-color: var(--footer-bg); color: #94a3b8; padding: 60px 0 30px; }
+.footer-container { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+.white-logo { color: var(--white); margin-bottom: 15px; }
+.footer-links h4, .footer-support h4, .footer-social h4 { color: var(--white); margin-bottom: 20px; font-size: 1.1rem; }
+footer ul li { margin-bottom: 10px; }
+footer ul li a:hover { color: var(--white); }
+.social-icons { display: flex; gap: 15px; }
+.social-icons a { width: 35px; height: 35px; background: #334155; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--white); }
+.social-icons a:hover { background: var(--primary-blue); }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 1024px) {
+    .team-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+    /* *** Note on Mobile: 
+    For mobile, the 'floating' card might look better as a full-width sticky bar. 
+    I've adjusted the .nav-container here to make it full width and remove the margin/shadow on small screens.
+    */
+    .hero-container, .features-grid, .about-container, .insights-grid, .footer-container { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-graphic { display: none; }
+    .nav-links, .nav-buttons { display: none; } /* Hide for simple mobile view */
+    .hero-content h1 { font-size: 2.5rem; }
+
+    .nav-container {
+        width: 100%; /* Go back to full width */
+        margin: 0 auto; /* Remove top margin */
+        border-radius: 0; /* Remove rounded corners */
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Apply a standard shadow */
+        padding: 15px 20px;
+    }
+    
+    body {
+        padding-top: 70px; /* Reduce body padding for the simpler mobile header */
+    }
+}
+.logo-img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+}

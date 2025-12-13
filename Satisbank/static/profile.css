@@ -1,0 +1,278 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+ body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+/* --- Layout --- */
+.app-container { display: flex; height: 100vh; overflow: hidden; }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+            padding-top: 20px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .sidebar-header .logo {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .text-logo {
+            width: 99px;       /* resize */
+            height: auto;       /* keep proportions */
+            display: block;     /* block element */
+            margin-top: 10px;
+            margin-left: 5px;  /* center horizontally */
+            opacity: 0.9;       /* transparency */
+        }
+
+        .sidebar h4 {
+            color: #3b5998;
+            margin: 15px 20px 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: #f0f4f8;
+        }
+
+        .sidebar-menu a.active {
+            background-color: #87C8FF;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            margin-right: 10px;
+        }
+
+        /* --- Help Center Card --- */
+        .help-card {
+            background-color: #f0f8ff; /* Light blue background */
+            border: 1px solid #cce5ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 30px 20px;
+            text-align: center;
+        }
+
+        .help-card h5 {
+            margin: 0 0 10px;
+            color: #007bff;
+            font-size: 1rem;
+        }
+
+        .help-card button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+      
+
+/* --- Main Content --- */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.page-header h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+/* --- Tabs --- */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-button.active {
+    color: #3f51b5;
+    border-bottom-color: #3f51b5;
+    background-color: #f0f3ff;
+}
+
+/* --- Profile Details Card --- */
+.profile-details {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.profile-details h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Profile Picture Section */
+.profile-picture-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.profilepic {
+    width: 100px;
+    height: 100px;  
+    border-radius: 100px;
+}
+.btn-secondary {
+    background-color: #ffffff;
+    color: #3f51b5;
+    border: 1px solid #3f51b5;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.btn-link {
+    background: none;
+    border: 1px solid #3f51b5;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+    padding: 8px 10px;
+    font-weight: 400;
+}
+
+/* Form Styling */
+.account-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 40px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color:#666;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fafafa;
+    color: #333;
+}
+
+.form-group input:read-only {
+    background-color: #f0f0f0; /* Slightly darker background for readonly */
+    cursor: default;
+}
+
+/* Action Buttons */
+.form-actions {
+    grid-column: 1 / -1; /* Span across both columns */
+    display: flex;
+    justify-content: flex-end; /* Push buttons to the right */
+    padding-top: 20px;
+}
+
+.btn-ghost {
+    background: none;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+
+/* Disabled Save button look */
+.btn-primary[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* When fields become editable */
+.account-form input:not([readonly]) {
+    background-color: #ffffff;
+    border: 1px solid #4a90e2;
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.4);
+}
+
+.tab-button {
+    padding: 10px 20px;
+    display: inline-block;
+    border: none;
+    background: #eee;
+    cursor: pointer;
+    text-decoration: none; /* for <a> */
+    color: inherit;
+}
+
+.tab-button.active {
+    background: #ddd;
+    font-weight: bold;
+}
