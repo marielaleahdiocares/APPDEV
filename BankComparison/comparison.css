@@ -1,0 +1,325 @@
+:root {
+  /* this was missing in your old CSS */
+  --accent-color: #3b82f6;
+}
+
+/* ------------------------------------
+   Page 1: Select Banks
+------------------------------------- */
+.bank-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 720px) {
+  .bank-selection-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bank-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+  user-select: none;
+}
+
+.bank-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.bank-logo {
+  width: 30px;
+  height: 30px;
+  margin: 0 15px;
+  object-fit: contain;
+}
+
+.bank-name {
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+/* Hide default checkbox */
+.bank-card input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent; /* hidden when unchecked */
+  font-size: 0.8em;
+  transition: all 0.2s;
+}
+
+/* Checked state */
+.bank-card input[type="checkbox"]:checked + .custom-checkbox {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #fff;
+}
+
+/* Controls Row (Clear/Compare Buttons) */
+.controls-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-clear {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: var(--text-color);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-clear:hover {
+  background-color: #f3f4f6;
+  border-color: #bdbdbd;
+}
+
+.btn-compare {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-compare:hover {
+  background-color: #2f457a;
+}
+
+/* --- Page 2-5: Comparison Header and Tabs --- */
+.comparison-header-controls {
+    display: flex;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.filter-data {
+    border-right: 1px solid #eee;
+    padding-right: 20px;
+    margin-right: 10px;
+    min-width: 200px;
+}
+
+.explore-data {
+    padding-left: 15px;
+    flex-grow: 1;
+}
+
+.filter-data strong, .explore-data strong {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.filter-data p, .explore-data p {
+    font-size: 0.85em;
+    color: var(--light-text-color);
+    margin-bottom: 15px;
+}
+
+.service-filter {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    padding: 8px 17px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    transition: background-color 0.2s, color 0.2s;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.tab i {
+    margin-right: 5px;
+}
+
+.tab.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
+}
+
+
+.select-banks-btn{
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 22px;
+  border-radius: 12px;
+
+  background: #0b2e6f;
+  color: #fff;
+  border: none;
+
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.select-banks-btn .icon{
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* ------------------------------------
+   Page 2: Comparison Table (like screenshot)
+------------------------------------- */
+.comparison-table-wrap{
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.comparison-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table thead th{
+  text-align: center;
+  font-weight: 700;
+  padding: 18px 16px;
+  background: #f8fafc;
+  border-bottom: 2px solid #1d4ed8; /* thin blue line */
+}
+
+.comparison-table thead th.services-col{
+  text-align: left;
+  width: 28%;
+}
+
+.comparison-table tbody td{
+  padding: 22px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+  font-size: 0.95em;
+}
+
+.comparison-table tbody tr:nth-child(even){
+  background: #f9fafb;
+}
+
+.service-category{
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.bank-cell{
+  text-align: center;
+  line-height: 1.35;
+  color: #111827;
+}
+
+.empty-state{
+  text-align: center;
+  padding: 26px;
+  color: #6b7280;
+}
+
+/* ===== Page 3: Financial Services table (grid) ===== */
+.financial-services-table {
+  display: grid;
+  gap: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e6eaf2;
+}
+
+/* Make each row a grid: 1 service col + N bank cols */
+.financial-services-table .table-header-row,
+.financial-services-table .table-row {
+  display: grid;
+  grid-template-columns: 320px repeat(var(--bank-cols), minmax(140px, 1fr));
+  align-items: center;
+}
+
+.financial-services-table .services-header {
+  background: #ffffff;
+  font-weight: 700;
+  border-bottom: 2px solid #1f4cff; /* blue line like your design */
+}
+
+.financial-services-table .header-cell,
+.financial-services-table .table-cell {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.financial-services-table .service-col,
+.financial-services-table .service-col-label {
+  font-weight: 600;
+}
+
+.financial-services-table .bank-col {
+  text-align: center;
+}
+
+/* Section headers spanning all columns */
+.section-header-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: #0b2b66; /* dark blue like screenshot */
+  color: #fff;
+  font-weight: 700;
+}
+
+.section-header-cell {
+  padding: 10px 14px;
+}
+
+/* Stripe rows inside the grid */
+.financial-services-table .table-row:nth-of-type(even) {
+  background: #fbfcff;
+}
+
+

@@ -1,0 +1,108 @@
+<!-- page2_detailed_table.html -->
+{% extends "comparison.html" %}
+
+{% block content %}
+<div class="comparison-header-controls">
+
+  <!-- Filter Section -->
+  <div class="filter-data">
+    <strong>Filter Data</strong>
+    <p>Filter the chart by service type.</p>
+    <select class="service-filter">
+      <option value="All Services">All Services</option>
+      <option value="Deposit and Account Services">Deposit and Account Services</option>
+      <option value="Payment and Transaction Services">Payment and Transaction Services</option>
+      <option value="Lending and Credit Services">Lending and Credit Services</option>
+      <option value="Investment and Trust Services">Investment and Trust Services</option>
+      <option value="Digital and Electronic Banking">Digital and Electronic Banking</option>
+    </select>
+  </div>
+
+  <!-- Explore / Tabs Section -->
+  <div class="explore-data">
+    <strong>Explore Data</strong>
+    <p>Explore the data using this</p>
+
+    <div class="tab-buttons">
+      <a
+        href="{% if banks %}
+                 {{ url_for('detailed_table_banks', banks=banks) }}
+               {% else %}
+                 {{ url_for('detailed_table') }}
+               {% endif %}"
+        class="tab active"
+      >
+        <i class="fas fa-table"></i> Detailed Table
+      </a>
+
+      <a
+  href="{% if banks %}
+           {{ url_for('financial_services', banks=banks) }}
+         {% else %}
+           {{ url_for('financial_services') }}
+         {% endif %}"
+  class="tab"
+>
+        <i class="fas fa-dollar-sign"></i> Financial Services
+      </a>
+
+      <a href="{{ url_for('visual_graphs') }}" class="tab">
+        <i class="fas fa-chart-bar"></i> Visual Graphs
+      </a>
+
+      <a href="{{ url_for('insights_summary') }}" class="tab">
+        <i class="fas fa-lightbulb"></i> Insights Summary
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- TABLE HERE -->
+<div class="comparison-table-wrap">
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th class="services-col">Services</th>
+
+        {% if selected_banks %}
+          {% for b in selected_banks %}
+            <th>{{ b.bank_code }}</th>
+          {% endfor %}
+        {% else %}
+          <th>No banks selected</th>
+        {% endif %}
+      </tr>
+    </thead>
+
+    <tbody>
+      {% if table_rows and selected_banks %}
+        {% for row in table_rows %}
+          <tr>
+            <td class="service-category">
+              {{ row["category_name"] }}
+            </td>
+
+            {% for b in selected_banks %}
+              <td class="bank-cell">
+                {{ row["values"].get(b.bank_code, "N/A") }}
+              </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="10" class="empty-state">No data to display.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+
+<a href="{{ url_for('comparison') }}" class="select-banks-btn">
+  <span class="icon">+</span>
+  Select other banks
+</a>
+
+{% endblock %}

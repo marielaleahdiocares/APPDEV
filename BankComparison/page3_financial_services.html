@@ -1,0 +1,74 @@
+<!-- page3_financial_services. html-->
+{% extends "comparison.html" %}
+{% block content %}
+
+<div class="comparison-header-controls">
+  <div class="filter-data">
+    <strong>Filter Data</strong>
+    <p>Refine the chart view using the service type filter.</p>
+    <select class="service-filter">
+      <option>All Services</option>
+    </select>
+  </div>
+
+  <div class="explore-data">
+    <strong>Explore Data</strong>
+    <p>Explore the data by this</p>
+
+    <div class="tab-buttons">
+      <a href="{{ url_for('detailed_table_banks', banks=banks) }}" class="tab">
+        <i class="fas fa-table"></i> Detailed Table
+      </a>
+
+      <a href="{{ url_for('financial_services', banks=banks) }}" class="tab active">
+        <i class="fas fa-dollar-sign"></i> Financial Services
+      </a>
+
+      <a href="{{ url_for('visual_graphs') }}" class="tab">
+        <i class="fas fa-chart-bar"></i> Visual Graphs
+      </a>
+
+      <a href="{{ url_for('insights_summary') }}" class="tab">
+        <i class="fas fa-lightbulb"></i> Insights Summary
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="comparison-table financial-services-table"
+     style="--bank-cols: {{ selected_banks|length }};">
+
+  <!-- Header row -->
+  <div class="table-header-row services-header">
+    <div class="header-cell service-col">Services</div>
+    {% for bank in selected_banks %}
+      <div class="header-cell bank-col">{{ bank.bank_code }}</div>
+    {% endfor %}
+  </div>
+
+  <!-- Sections -->
+  {% for section, services in financial_data_structured.items() %}
+    <div class="section-header-row">
+      <div class="section-header-cell">{{ section }}</div>
+    </div>
+
+    {% for row in services %}
+      <div class="table-row">
+        <div class="table-cell service-col-label">{{ row.service }}</div>
+
+        {% for bank in selected_banks %}
+          <div class="table-cell bank-col">
+            {{ row[bank.bank_code] }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>
+
+<a href="{{ url_for('comparison') }}" class="select-banks-btn">
+  <span class="icon">+</span>
+  Select other banks
+</a>
+
+{% endblock %}
