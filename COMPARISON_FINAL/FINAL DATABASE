@@ -1,0 +1,289 @@
+-- bankComparison.sql (CORRECTED)
+
+DROP TABLE IF EXISTS service_rates;
+DROP TABLE IF EXISTS services;
+DROP TABLE IF EXISTS service_type;
+DROP TABLE IF EXISTS service_categories;
+DROP TABLE IF EXISTS banks;
+
+-- ==========================
+-- BANKS TABLE
+-- ==========================
+CREATE TABLE banks (
+    bank_id INT AUTO_INCREMENT PRIMARY KEY,
+    bank_code VARCHAR(20) NOT NULL UNIQUE,
+    bank_name VARCHAR(255) NOT NULL
+);
+
+INSERT INTO banks (bank_code, bank_name) VALUES
+('BDO', 'Banco de Oro Unibank, Inc.'),
+('LANDBANK', 'Land Bank of the Philippines'),
+('METROBANK', 'Metropolitan Bank & Trust Company'),
+('BPI', 'Bank of the Philippine Islands'),
+('PNB', 'Philippine National Bank'),
+('CHINABANK', 'China Banking Corporation'),
+('RCBC', 'Rizal Commercial Banking Corporation'),
+('SECB', 'Security Bank Corporation'),
+('EASTWEST', 'East West Banking Corporation'),
+('BOC', 'Bank of Commerce');
+
+-- ==========================
+-- SERVICE CATEGORIES TABLE
+-- (FIXED: add Investment + make Digital category_id = 5)
+-- ==========================
+CREATE TABLE service_categories (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO service_categories (category_name) VALUES
+('Deposit and Account Services'),           -- 1
+('Payment and Transaction Services'),       -- 2
+('Lending and Credit Services'),            -- 3
+('Investment and Trust Services'),          -- 4
+('Digital and Electronic Banking');         -- 5
+
+-- ==========================
+-- SERVICE TYPE TABLE
+-- (FIXED: rename PK to avoid confusion with services.service_id)
+-- ==========================
+CREATE TABLE service_type (
+    service_type_id INT AUTO_INCREMENT PRIMARY KEY,
+    bank_id INT NOT NULL,
+    category_id INT NOT NULL,
+    description VARCHAR(150) NOT NULL,
+    FOREIGN KEY (bank_id) REFERENCES banks(bank_id),
+    FOREIGN KEY (category_id) REFERENCES service_categories(category_id)
+);
+
+
+-- Deposit and Account Services (category_id = 1)
+INSERT INTO service_type (bank_id, category_id, description) VALUES
+(1, 1, 'Regular Savings Account, Checking / Current Account, Time Deposit Account'),
+(2, 1, 'Regular Savings Account, Checking / Current Account, Time Deposit Account'),
+(3, 1, 'Regular Savings Account, Checking / Current Account, Time Deposit Account'),
+(4, 1, 'Regular Savings Account, Checking / Current Account, Time Deposit Account'),
+(5, 1, 'Regular Savings Account, Checking / Current Account, Time Deposit Account'),
+(6, 1, 'Regular Savings Account, Checking / Current Account, Time Deposit Account'),
+(7, 1, 'Regular Savings Account, All-in-One / Transaction Savings, Time Deposit Account'),
+(8, 1, 'Regular Savings Account, All-Access, Time Deposit Accounts'),
+(9, 1, 'Regular Savings Account, Checking / Current Account, Time Deposit Account'),
+(10, 1, 'Savings Account, Checking / Current Account, Time Deposit Account');
+
+-- Payment and Transaction Services (category_id = 2)
+INSERT INTO service_type (bank_id, category_id, description) VALUES
+(1, 2, 'Overseas ATM Withdrawal, Interbranch, Debit Card POS'),
+(2, 2, 'Interbank Fund Transfer, ATM Cash Withdrawal, Bills Payment'),
+(3, 2, 'Interbank Fund Transfer, Overseas ATM Withdrawal, Debit Card POS / Online Purchase'),
+(4, 2, 'Interbank Fund Transfer, Bills Payment, Online Purchase'),
+(5, 2, 'Overseas ATM Withdrawal, OTC Fund Transfer, Bills Payment Services'),
+(6, 2, 'Interbank Fund Transfer, Debit Card POS, Bills Payment Services'),
+(7, 2, 'Interbank Fund Transfer Debit Card POS, ATM Cash Withdrawal'),
+(8, 2, 'Interbank Fund Transfer, Debit Card POS, Bills Payment'),
+(9, 2, 'Interbank Fund Transfer, Debit Card POS, ATM Cash Withdrawal'),
+(10, 2, 'Interbank Fund Transfer, Debit Card POS, Bills Payment');
+
+-- Lending and Credit Services (category_id = 3)
+INSERT INTO service_type (bank_id, category_id, description) VALUES
+(1, 3, 'Credit Card, Consumer Loan, Home Loan'),
+(2, 3, 'Agricultural Loans, Personal Loans, Home Loan'),
+(3, 3, 'Credit Card, Personal Loan, Home Loan'),
+(4, 3, 'Credit Card, Personal Loan, Home Loan'),
+(5, 3, 'Personal Loan, Home Loan, Auto Loan'),
+(6, 3, 'Credit Card, Business, Home Loan'),
+(7, 3, 'Credit Card, Personal Loan, Auto Loan'),
+(8, 3, 'Credit Card, Personal Loan, Home Loan'),
+(9, 3, 'Credit Card, Auto Loan, Personal Loan'),
+(10, 3, 'Business Loan, Personal Loan, Home Loan');
+
+-- Investment and Trust Services (category_id = 4)
+INSERT INTO service_type (bank_id, category_id, description) VALUES
+(1, 4, 'UITFs, Trust & Wealth Management Services, Investment Management'),
+(2, 4, 'UITFs, Trust & Fiduciary Services, Government Securities'),
+(3, 4, 'UITFs, Trust & Wealth Management Services, Investment Management Services'),
+(4, 4, 'UITFs, Trust & Wealth Management Services, Managed Investment Products'),
+(5, 4, 'UITFs, Trust & Investment Management Services, Government Securities Investments'),
+(6, 4, 'UITFs, Trust & Wealth Management Services, Fixed-Income Investments'),
+(7, 4, 'UITFs, Trust & Asset Management Services, Investment Products'),
+(8, 4, 'UITFs, Trust & Asset Management Services, Wealth Products'),
+(9, 4, 'UITFs, Trust & Investment Management Services, Fixed-Income'),
+(10, 4, 'UITFs, Trust & Fiduciary Services, Investment Management Services');
+
+-- Digital and Electronic Banking (category_id = 5)
+INSERT INTO service_type (bank_id, category_id, description) VALUES
+(1, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment'),
+(2, 5, 'Mobile Banking App, Online Fund Transfer, Online Government & Utility Payments'),
+(3, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment'),
+(4, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment'),
+(5, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment'),
+(6, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment'),
+(7, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment'),
+(8, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment'),
+(9, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment'),
+(10, 5, 'Mobile Banking App, Online Fund Transfer, Online Bills Payment');
+
+
+-- ==========================
+-- SERVICES (from Excel)
+-- ==========================
+CREATE TABLE services (
+    service_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT NOT NULL,
+    service_name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES service_categories(category_id),
+    UNIQUE (category_id, service_name)
+);
+
+INSERT INTO services (category_id, service_name) VALUES
+(1, 'Regular Savings (p.a.)'),
+(1, 'Time Deposit (p.a.)'),
+
+
+(2, 'Credit Card Interest'),
+
+(3, 'Consumer / Personal Loans'),
+(3, 'Home Loans'),
+(3, 'Auto Loans'),
+
+(4, 'UITFs (Minimum Investment)'),
+(4, 'Mutual Fund Management Fee'),
+
+(5, 'Transfer Fees (PESONet)'),
+(5, 'Transfer Fees (InstaPay)');
+
+-- ==========================
+-- SERVICE RATES (from Excel)
+-- bank_id is based on insertion order above:
+-- 1=BPI,2=BDO,3=RCBC,4=LANDBANK,5=METROBANK,6=PNB,7=CHINABANK,8=SECB,9=EASTWEST,10=BOC
+-- service_id is based on services insertion order above (1..17)
+-- ==========================
+CREATE TABLE service_rates (
+    rate_id INT AUTO_INCREMENT PRIMARY KEY,
+    bank_id INT NOT NULL,
+    service_id INT NOT NULL,
+    rate_value VARCHAR(50) NOT NULL,
+    FOREIGN KEY (bank_id) REFERENCES banks(bank_id),
+    FOREIGN KEY (service_id) REFERENCES services(service_id),
+    UNIQUE (bank_id, service_id)
+);
+
+INSERT INTO service_rates (bank_id, service_id, rate_value) VALUES
+-- Service 1: Regular Savings (p.a.)
+(1, 1, '0.0625%'),
+(2, 1, '0.05'),
+(3, 1, '0.0625%'),
+(4, 1, '0.0625%'),
+(5, 1, '~0.10%'),
+(6, 1, '~0.125%'),
+(7, 1, '0.15% – 0.45%'),
+(8, 1, '~0.10% – 1.20%'),
+(9, 1, '~0.125%'),
+(10, 1, 'Not specified'),
+
+-- Service 2: Regular Time Deposit (p.a.)
+(1, 2, '0.125%–0.500%'),
+(2, 2, 'Not specified'),
+(3, 2, '0.150%–0.750%'),
+(4, 2, 'Not specified'),
+(5, 2, 'Up to ~4.5% p.a.'),
+(6, 2, 'Not specified'),
+(7, 2, '0.500%–1.375%'),
+(8, 2, '~0.88%–3.75%'),
+(9, 2, '0.10%'),
+(10, 2, '0.10%'),
+
+-- Service 3: Credit Card Interest
+(1, 3, 'Up to ~3.00% per month'),
+(2, 3, 'Not specified'),
+(3, 3, 'Up to ~3.00% per month'),
+(4, 3, 'Up to ~3.00% per month'),
+(5, 3, 'Up to ~3.00% per month'),
+(6, 3, 'Up to ~3.00% per month'),
+(7, 3, 'Up to ~3.00% per month'),
+(8, 3, 'Up to ~3.00% per month'),
+(9, 3, 'Up to ~3.00% per month'),
+(10, 3, 'Not specified'),
+
+-- Service 4: Consumer / Personal Loan
+(1, 4, '1.20% – 2.50% per month'),
+(2, 4, 'Not specified'),
+(3, 4, '1.25% – 2.50% per month'),
+(4, 4, '1.20% – 2.00% per month'),
+(5, 4, 'Not specified'),
+(6, 4, 'Not specified'),
+(7, 4, '1.00% – 2.00% per month'),
+(8, 4, '1.25% – 3.00% per month'),
+(9, 4, '1.20% – 2.99% per month'),
+(10, 4, 'Not specified'),
+
+-- Service 5: Home Loans
+(1, 5, '6.25% – 8.50% p.a.'),
+(2, 5, '6.00% – 7.50% p.a.'),
+(3, 5, '6.50% – 8.75% p.a.'),
+(4, 5, '6.25% – 8.25% p.a.'),
+(5, 5, '6.00% – 8.00% p.a.'),
+(6, 5, '6.50% – 9.00% p.a.'),
+(7, 5, '6.25% – 8.50% p.a.'),
+(8, 5, '6.75% – 9.00% p.a.'),
+(9, 5, '6.50% – 9.25% p.a.'),
+(10, 5, 'Not specified'),
+
+-- Service 6: Auto Loans
+(1, 6, '5.25% – 8.50% p.a.'),
+(2, 6, '5.00% – 7.50% p.a.'),
+(3, 6, '5.75% – 8.75% p.a.'),
+(4, 6, '5.25% – 8.25% p.a.'),
+(5, 6, '5.50% – 8.50% p.a.'),
+(6, 6, '5.75% – 9.00% p.a.'),
+(7, 6, '5.50% – 8.75% p.a.'),
+(8, 6, '6.00% – 9.25% p.a.'),
+(9, 6, '.75% – 9.50% p.a.'),
+(10, 6, 'Not specified'),
+
+-- Service 7: UITFs (Minimum Investment)
+(1, 7, '₱10,000'),
+(2, 7, '₱10,000'),
+(3, 7, '₱10,000'),
+(4, 7, '₱10,000'),
+(5, 7, '₱10,000'),
+(6, 7, '₱10,000'),
+(7, 7, '₱10,000'),
+(8, 7, '₱10,000'),
+(9, 7, '₱10,000'),
+(10, 7, 'Not specified'),
+
+-- Service 8: Mutual Fund Management Fee
+(1, 8, '~0.50% – 2.00% p.a.'),
+(2, 8, '~0.50% – 1.50% p.a.'),
+(3, 8, '~0.50% – 2.00% p.a.'),
+(4, 8, '~0.75% – 2.00% p.a.'),
+(5, 8, '~0.50% – 1.50% p.a.'),
+(6, 8, '~0.50% – 2.00% p.a.'),
+(7, 8, '~0.75% – 2.00% p.a.'),
+(8, 8, '~0.75% – 2.25% p.a.'),
+(9, 8, '~0.75% – 2.00% p.a.'),
+(10, 8, 'Not specified'),
+
+-- Service 9: Transfer Fees (PESONet)
+(1, 9, '₱50.00'),
+(2, 9, '₱0.00 – ₱17.00'),
+(3, 9, '₱50.00'),
+(4, 9, '₱15.00 – ₱50.00'),
+(5, 9, '₱20.00'),
+(6, 9, '₱20.00'),
+(7, 9, '₱10.00'),
+(8, 9, '₱15.00'),
+(9, 9, 'FREE'),
+(10, 9, '₱15.00'),
+
+-- Service 10: Transfer Fees (InstaPay)
+(1, 10, '₱10.00'),
+(2, 10, '₱0.00 – ₱15.00'),
+(3, 10, '₱0.00 – ₱25.00'),
+(4, 10, '₱0.00 – ₱10.00'),
+(5, 10, '₱10.00 – ₱20.00'),
+(6, 10, '₱5.00 – ₱15.00'),
+(7, 10, '₱8.00 – ₱25.00'),
+(8, 10, '₱25.00'),
+(9, 10, '₱10.00'),
+(10, 10, '₱15.00');
