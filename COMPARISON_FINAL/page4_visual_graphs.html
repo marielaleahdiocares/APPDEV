@@ -1,0 +1,176 @@
+<!-- page4_visual_graphs.html -->
+{% extends "comparison.html" %}
+
+{% block content %}
+<div class="comparison-header-controls">
+
+  <!-- Filter -->
+  <div class="filter-data">
+    <strong>Filter Data</strong>
+    <p>Refine the chart view using the service type filter.</p>
+
+    <select class="service-filter" id="serviceFilter">
+      {% for s in service_types %}
+        <option value="{{ s }}" {% if s == selected_filter %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Tabs -->
+  <div class="explore-data">
+    <strong>Explore Data</strong>
+    <p>Click here to explore the data</p>
+
+    <div class="tab-buttons">
+      <a href="{{ url_for('detailed_table_banks', banks=banks_csv, filter=selected_filter) }}" class="tab">
+        <i class="fas fa-table"></i> Detailed Table
+      </a>
+
+      <a href="{{ url_for('financial_services', banks=banks_csv, filter=selected_filter) }}" class="tab">
+        <i class="fas fa-dollar-sign"></i> Financial Services
+      </a>
+
+      <a href="{{ url_for('visual_graphs', banks=banks_csv, filter=selected_filter) }}" class="tab active">
+        <i class="fas fa-chart-bar"></i> Visual Graphs
+      </a>
+
+      <a href="{{ url_for('insights_summary', banks=banks_csv, filter=selected_filter) }}" class="tab">
+        <i class="fas fa-lightbulb"></i> Insights Summary
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div class="graphs-container">
+
+  <div class="graph-row top-graphs">
+    <div class="graph-card">
+      <div class="graph-head">
+        <h3 class="graph-title">Overall Satisfaction</h3>
+        <span class="graph-sub">Service Coverage Score (80–100)</span>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="overallSatisfactionChart"></canvas>
+      </div>
+    </div>
+
+    <div class="graph-card">
+      <div class="graph-head">
+        <h3 class="graph-title">Digital Performance</h3>
+        <span class="graph-sub">Digital Services Score (4.0–5.0)</span>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="digitalPerformanceChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="graph-row bottom-graphs">
+    <div class="graph-card larger-card">
+      <div class="graph-head">
+        <h3 class="graph-title">Savings vs Loan Rate</h3>
+        <span class="graph-sub">Average rates from database</span>
+      </div>
+      <div class="chart-wrap tall">
+        <canvas id="savingsLoanLineChart"></canvas>
+      </div>
+    </div>
+
+    <div class="graph-card smaller-card">
+      <div class="graph-head">
+        <h3 class="graph-title">Service Diversity Index</h3>
+        <span class="graph-sub">Distinct rated services</span>
+      </div>
+      <div class="chart-wrap tall">
+        <canvas id="serviceDiversityRadar"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const banks = {{ graph_data.banks | tojson }};
+  const overallSatisfaction = {{ graph_data.overall_satisfaction | tojson }};
+  const digitalPerformance = {{ graph_data.digital_performance | tojson }};
+  const savingsRate = {{ graph_data.savings_rate | tojson }};
+  const loanRate = {{ graph_data.loan_rate | tojson }};
+  const serviceDiversity = {{ graph_data.service_diversity | tojson }};
+
+  new Chart(document.getElementById("overallSatisfactionChart"), {
+    type: "bar",
+    data: {
+      labels: banks,
+      datasets: [{ label: "Score", data: overallSatisfaction, borderWidth: 1 }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: { y: { min: 80, max: 100, ticks: { stepSize: 5 } } }
+    }
+  });
+
+  new Chart(document.getElementById("digitalPerformanceChart"), {
+    type: "bar",
+    data: {
+      labels: banks,
+      datasets: [{ label: "Rating", data: digitalPerformance, borderWidth: 1 }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: { y: { min: 4.0, max: 5.0, ticks: { stepSize: 0.2 } } }
+    }
+  });
+
+  new Chart(document.getElementById("savingsLoanLineChart"), {
+    type: "line",
+    data: {
+      labels: banks,
+      datasets: [
+        { label: "Savings Avg", data: savingsRate, tension: 0.3 },
+        { label: "Loan Avg", data: loanRate, tension: 0.3 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  new Chart(document.getElementById("serviceDiversityRadar"), {
+    type: "radar",
+    data: {
+      labels: banks,
+      datasets: [{ label: "Distinct Services", data: serviceDiversity, fill: true }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: { r: { beginAtZero: true } }
+    }
+  });
+
+  // ✅ Filter reload (keeps banks from server, not from chart)
+  const banksCsv = "{{ banks_csv }}";
+  const filterEl = document.getElementById("serviceFilter");
+
+  filterEl.addEventListener("change", () => {
+    const selected = filterEl.value;
+    const params = new URLSearchParams(window.location.search);
+    params.set("banks", banksCsv);
+    params.set("filter", selected);
+    window.location.search = params.toString();
+  });
+</script>
+
+<a href="{{ url_for('comparison') }}" class="select-banks-btn">
+  <span class="icon">+</span>
+  Select other banks
+</a>
+
+{% endblock %}

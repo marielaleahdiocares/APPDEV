@@ -1,0 +1,138 @@
+
+<!-- page2_detailed_table.html -->
+{% extends "comparison.html" %}
+
+{% block content %}
+<div class="comparison-header-controls">
+
+  <!-- Filter Section -->
+  <div class="filter-data">
+    <strong>Filter Data</strong>
+    <p>Refine the chart view using the service type filter.</p>
+
+    <select class="service-filter" id="serviceFilter">
+      {% for s in service_types %}
+        <option value="{{ s }}" {% if s == selected_filter %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Explore / Tabs Section -->
+  <div class="explore-data">
+    <strong>Explore Data</strong>
+    <p>Click here to explore the data</p>
+
+    <div class="tab-buttons">
+
+      <!-- Detailed Table -->
+      <a
+        href="{% if banks %}
+                {{ url_for('detailed_table_banks', banks=banks, filter=selected_filter) }}
+              {% else %}
+                {{ url_for('comparison') }}
+              {% endif %}"
+        class="tab active"
+      >
+        <i class="fas fa-table"></i> Detailed Table
+      </a>
+
+      <!-- Financial Services -->
+      <a
+        href="{% if banks %}
+                {{ url_for('financial_services', banks=banks, filter=selected_filter) }}
+              {% else %}
+                {{ url_for('comparison') }}
+              {% endif %}"
+        class="tab"
+      >
+        <i class="fas fa-dollar-sign"></i> Financial Services
+      </a>
+
+      <!-- Visual Graphs -->
+      <a
+        href="{% if banks %}
+                {{ url_for('visual_graphs', banks=banks, filter=selected_filter) }}
+              {% else %}
+                {{ url_for('comparison') }}
+              {% endif %}"
+        class="tab"
+      >
+        <i class="fas fa-chart-bar"></i> Visual Graphs
+      </a>
+
+      <!-- Insights Summary -->
+      <a
+        href="{% if banks %}
+                {{ url_for('insights_summary', banks=banks, filter=selected_filter) }}
+              {% else %}
+                {{ url_for('comparison') }}
+              {% endif %}"
+        class="tab"
+      >
+        <i class="fas fa-lightbulb"></i> Insights Summary
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- TABLE -->
+<div class="comparison-table-wrap">
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th class="services-col">Services</th>
+
+        {% if selected_banks %}
+          {% for b in selected_banks %}
+            <th>{{ b.bank_code }}</th>
+          {% endfor %}
+        {% else %}
+          <th>No banks selected</th>
+        {% endif %}
+      </tr>
+    </thead>
+
+    <tbody>
+      {% if table_rows and selected_banks %}
+        {% for row in table_rows %}
+          <tr>
+            <td class="service-category">
+              {{ row["category_name"] }}
+            </td>
+
+            {% for b in selected_banks %}
+              <td class="bank-cell">
+                {{ row["values"].get(b.bank_code, "N/A") }}
+              </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="10" class="empty-state">No data to display.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<a href="{{ url_for('comparison') }}" class="select-banks-btn">
+  <span class="icon">+</span>
+  Select other banks
+</a>
+
+<!-- ✅ Filter JS (reload with ?filter=...) -->
+<script>
+  document.getElementById("serviceFilter").addEventListener("change", function () {
+    const selected = this.value;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("filter", selected);
+
+    window.location.href = url.toString();
+  });
+</script>
+
+{% endblock %}

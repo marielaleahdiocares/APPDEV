@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Comparison</title>
+
+  <!-- Sidebar CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}">
+
+  <!-- Font Awesome (for bell icon) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="Logo">
+      <img src="{{ url_for('static', filename='images/logo_text.png') }}" class="text-logo" alt="Logo Text">
+    </div>
+
+    <h4>Menu</h4>
+    <nav class="sidebar-menu">
+      <a href="{{ url_for('home') }}">Dashboard</a>
+      <a href="{{ url_for('comparison') }}" class="active">Comparison</a>
+      <a href="{{ url_for('reco') }}">Recommendation</a>
+      <a href="{{ url_for('analysis') }}">Analytics</a>
+      <a href="{{ url_for('bprofile') }}">Bank Profile</a>
+    </nav>
+
+    <h4>General</h4>
+    <nav class="sidebar-menu">
+      <a href="{{ url_for('profile') }}">Profile</a>
+      <a href="{{ url_for('logout') }}">Log out</a>
+    </nav>
+
+    <div class="help-card">
+      <h5>Help Center</h5>
+      <p style="font-size: 0.8rem; color: #6c757d;">
+        Having trouble? Check out our FAQ or chat with support.
+      </p>
+      <a href="{{ url_for('help_center') }}"><button type="button">Go to Help Center</button></a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="main-header">
+      <div class="header-title">Bank Profile</div>
+      <div class="user-controls">
+        <span class="notification-icon"><i class="fa-solid fa-bell"></i></span>
+        <span class="user-size-toggle">XL</span>
+        <span class="user-profile-name">Xyross Lee</span>
+      </div>
+    </header>
+
+    <div class="content-body">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+</body>
+</html>

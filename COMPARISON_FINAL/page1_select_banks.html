@@ -1,0 +1,31 @@
+<!-- page1_select_banks.html -->
+{% extends "comparison.html" %}
+
+{% block content %}
+<p class="description">Select two or more banks to see how they perform side by side.</p>
+
+<form method="POST" action="{{ url_for('comparison') }}">
+  <div class="bank-selection-grid">
+    {% for bank in all_banks %}
+    <label class="bank-card">
+      <input
+        type="checkbox"
+        name="selected_banks"
+        value="{{ bank.bank_code }}"
+      >
+      <span class="custom-checkbox">
+        <i class="fas fa-check"></i>
+      </span>
+
+      <img src="{{ url_for('static', filename=bank.logo) }}" alt="{{ bank.bank_code }} Logo" class="bank-logo">
+      <span class="bank-name">{{ bank.bank_code }} ({{ bank.bank_name }})</span>
+    </label>
+    {% endfor %}
+  </div>
+
+  <div class="controls-row">
+    <button type="reset" class="btn-clear">Clear Selection</button>
+    <button type="submit" class="btn-compare">Compare Now</button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,85 @@
+<!-- page5_insights_summary.html -->
+{% extends "comparison.html" %}
+
+{% block content %}
+<div class="comparison-header-controls">
+
+  <div class="filter-data">
+    <strong>Filter Data</strong>
+    <p>Refine the chart view using the service type filter.</p>
+
+    <select class="service-filter" id="serviceFilter">
+      {% for s in service_types %}
+        <option value="{{ s }}" {% if s == selected_filter %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="explore-data">
+    <strong>Explore Data</strong>
+    <p>Click here to explore the data</p>
+
+    <div class="tab-buttons">
+      <a href="{{ url_for('detailed_table_banks', banks=banks_csv, filter=selected_filter) }}" class="tab">
+        <i class="fas fa-table"></i> Detailed Table
+      </a>
+
+      <a href="{{ url_for('financial_services', banks=banks_csv, filter=selected_filter) }}" class="tab">
+        <i class="fas fa-dollar-sign"></i> Financial Services
+      </a>
+
+      <a href="{{ url_for('visual_graphs', banks=banks_csv, filter=selected_filter) }}" class="tab">
+        <i class="fas fa-chart-bar"></i> Visual Graphs
+      </a>
+
+      <a href="{{ url_for('insights_summary', banks=banks_csv, filter=selected_filter) }}" class="tab active">
+        <i class="fas fa-lightbulb"></i> Insights Summary
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div class="insights-summary-table">
+  <div class="table-header-row services-header">
+    <div class="header-cell insight-col cat">Category</div>
+    <div class="header-cell insight-col top">Top Bank</div>
+    <div class="header-cell insight-col reason">Reason</div>
+  </div>
+
+  {% if insights and insights|length > 0 %}
+    {% for insight in insights %}
+      <div class="table-row">
+        <div class="table-cell insight-col cat">{{ insight["Category"] }}</div>
+        <div class="table-cell insight-col top">{{ insight["Top Bank"] }}</div>
+        <div class="table-cell insight-col reason">{{ insight["Reason"] }}</div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="table-row">
+      <div class="table-cell insight-col reason" style="grid-column: 1 / -1;">
+        No insights to display.
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<a href="{{ url_for('comparison') }}" class="select-banks-btn">
+  <span class="icon">+</span>
+  Select other banks
+</a>
+
+<script>
+  const banksCsv = "{{ banks_csv }}";
+  const filterEl = document.getElementById("serviceFilter");
+
+  filterEl.addEventListener("change", () => {
+    const selected = filterEl.value;
+    const params = new URLSearchParams(window.location.search);
+    params.set("banks", banksCsv);
+    params.set("filter", selected);
+    window.location.search = params.toString();
+  });
+</script>
+
+{% endblock %}
