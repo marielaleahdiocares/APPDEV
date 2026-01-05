@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guest Dashboard</title>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #f3f4f6;
+      padding: 30px;
+    }
+
+    .page{
+      max-width: 980px;
+      margin: auto;
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .btn{
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid #d1d5db;
+      color: #111827;
+      margin-right: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      background: #fff;
+    }
+    .btn-primary{
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+      color: #fff;
+    }
+
+    /* ==============================
+       SweetAlert2 Register Popup (SMALL like screenshot)
+    ============================== */
+    .register-popup{
+      border-radius: 18px !important;
+      padding: 18px 18px 14px !important;
+      width: 560px !important;
+      max-width: calc(100vw - 32px) !important;
+      box-shadow: 0 18px 60px rgba(0,0,0,.18) !important;
+    }
+
+    .swal2-backdrop-show{
+      background: rgba(15, 23, 42, 0.28) !important;
+    }
+
+    .swal2-html-container{
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .register-title{
+      font-size: 26px;
+      line-height: 1.2;
+      margin: 4px 0 14px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-align: center;
+    }
+
+    .register-form{
+      width: 100%;
+      text-align: left;
+    }
+
+    .field-label{
+      font-size: 14px;
+      font-weight: 800;
+      margin: 10px 0 6px;
+      color: #0f172a;
+    }
+
+    .input-wrap{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1.7px solid #93c5fd;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: #f8fbff;
+    }
+
+    .input-icon{
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      color: #60a5fa;
+      flex: 0 0 auto;
+      font-size: 16px;
+    }
+
+    .input-wrap input{
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      background: transparent;
+      color: #0f172a;
+    }
+
+    .row-between{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0 6px;
+      font-size: 13px;
+      color: #0f172a;
+    }
+
+    .remember{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .remember input{
+      width: 14px;
+      height: 14px;
+      accent-color: #22c55e;
+    }
+
+    .forgot{
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .divider{
+      height: 1px;
+      background: rgba(29,78,216,.35);
+      margin: 12px 0 12px;
+    }
+
+    .register-btn{
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 20px;
+      font-weight: 900;
+      cursor: pointer;
+      background: #93c5fd;
+      color: #0b1220;
+    }
+
+    .register-btn:active{
+      transform: scale(0.99);
+    }
+
+    /* Flash message demo */
+    .flash{
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin: 10px 0 0;
+      font-size: 14px;
+    }
+    .flash.success{ background: #dcfce7; color: #166534; }
+    .flash.error{ background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <h2>Guest Dashboard</h2>
+    <p>Click restricted features below to show the popup.</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for cat, msg in messages %}
+          <div class="flash {{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- ✅ Restricted buttons/links -->
+    <a class="btn btn-primary" href="{{ url_for('restricted') }}" data-restricted="1">
+      Open Detailed Data (Restricted)
+    </a>
+
+    <button class="btn" data-restricted="1" data-href="{{ url_for('restricted') }}">
+      Bank Analytics (Restricted)
+    </button>
+
+    <!-- ✅ Not restricted -->
+    <a class="btn" href="{{ url_for('logout') }}">Reset to Guest</a>
+  </div>
+
+  <script>
+    function openRegisterPopup(nextUrl) {
+      const formHtml = `
+        <div>
+          <div class="register-title">
+            Access restricted. Please register<br/>to view detailed data.
+          </div>
+
+          <form class="register-form" id="registerForm" method="POST" action="{{ url_for('register') }}">
+            <input type="hidden" name="next" value="${nextUrl ? nextUrl : ''}"/>
+
+            <div class="field-label">Name</div>
+            <div class="input-wrap">
+              <div class="input-icon">✉️</div>
+              <input name="name" type="text" placeholder="Enter Name" required />
+            </div>
+
+            <div class="field-label">Email Address</div>
+            <div class="input-wrap">
+              <div class="input-icon">✉️</div>
+              <input name="email" type="email" placeholder="Enter Email Address" required />
+            </div>
+
+            <div class="field-label">Password</div>
+            <div class="input-wrap">
+              <div class="input-icon">🔑</div>
+              <input name="password" type="password" placeholder="Enter Password" required />
+            </div>
+
+            <div class="row-between">
+              <label class="remember">
+                <input type="checkbox" name="remember" />
+                <span>Remember me</span>
+              </label>
+              <a class="forgot" href="#"
+                onclick="event.preventDefault(); Swal.fire('Forgot Password?', 'Connect this to your forgot password page.', 'info')">
+                Forgot Password?
+              </a>
+            </div>
+
+            <div class="divider"></div>
+            <button class="register-btn" type="submit">Register</button>
+          </form>
+        </div>
+      `;
+
+      Swal.fire({
+        html: formHtml,
+        showConfirmButton: false,
+        showCloseButton: true,
+        customClass: { popup: "register-popup" },
+        width: 560,
+        didOpen: () => {
+          const first = document.querySelector('#registerForm input[name="name"]');
+          if (first) first.focus();
+        }
+      });
+    }
+
+    // ✅ Intercept restricted clicks
+    document.addEventListener("click", function(e) {
+      const el = e.target.closest("[data-restricted='1']");
+      if (!el) return;
+
+      e.preventDefault();
+
+      // Get next URL from href or data-href (for buttons)
+      const nextUrl = el.getAttribute("href") || el.getAttribute("data-href") || "";
+      openRegisterPopup(nextUrl);
+    });
+  </script>
+</body>
+</html>
