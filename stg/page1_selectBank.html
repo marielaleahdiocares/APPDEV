@@ -1,0 +1,31 @@
+<form method="POST" action="{{ url_for('comparison') }}">
+  <!-- Service Selection Section -->
+  <div class="service-selection">
+    <label for="serviceSelect">Select Service</label>
+    <select id="serviceSelect" name="selected_service">
+      {% for service in all_services %}
+        <option value="{{ service.code }}">{{ service.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Bank Selection Section -->
+  <div class="bank-selection-grid">
+    {% for bank in all_banks %}
+      <label class="bank-card">
+        <input type="checkbox" name="selected_banks" value="{{ bank.bank_code }}">
+        <span class="custom-checkbox">
+          <i class="fas fa-check"></i>
+        </span>
+
+        <img src="{{ url_for('static', filename=bank.logo) }}" alt="{{ bank.bank_code }} Logo" class="bank-logo">
+        <span class="bank-name">{{ bank.bank_code }} ({{ bank.bank_name }})</span>
+      </label>
+    {% endfor %}
+  </div>
+
+  <div class="controls-row">
+    <button type="reset" class="btn-clear">Clear Selection</button>
+    <button type="submit" class="btn-compare">Compare Now</button>
+  </div>
+</form>
